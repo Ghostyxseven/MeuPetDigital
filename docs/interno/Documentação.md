@@ -1,38 +1,273 @@
-# MeuPetDigital - Documentação Técnica
+# MeuPetDigital - Documento Oficial do Projeto
 
 **Instituição:** Instituto Federal de Educação, Ciência e Tecnologia do Piauí (IFPI) - Campus Piripiri  
 **Curso:** Análise e Desenvolvimento de Sistemas  
 **Disciplina:** Programação para Internet I  
 **Professor:** Jeferson Soares  
+**Projeto:** MeuPetDigital
 
 ---
 
-## 1. Visão Geral do Projeto
-O **MeuPetDigital** é uma solução web desenvolvida para mitigar o problema do esquecimento vacinal em animais domésticos. O sistema centraliza o histórico de saúde, substituindo métodos manuais por uma interface dinâmica que alerta o tutor sobre doses pendentes e atrasadas.
+## 1. Resumo Executivo
 
-## 2. Requisitos do Sistema
+O MeuPetDigital é uma aplicação web para organização da saúde preventiva de cães. O sistema resolve o problema de controle manual de vacinas, centralizando cadastro de pets, histórico vacinal, status de imunização e acompanhamento de próximas doses.
 
-### 2.1 Requisitos Funcionais
-* **RF01 - Autenticação:** Registro e autenticação de tutores com segregação de dados.
-* **RF02 - Gestão de Pets (CRUD):** Ciclo completo de manutenção de perfis caninos (Criar, Ler, Atualizar, Deletar).
-* **RF03 - Controle de Vacinação (CRUD):** Registro histórico de aplicações e agendamento de doses futuras.
-* **RF04 - Análise Visual de Status:** Dashboard interativo com indicadores de urgência (Em dia, Próxima, Atrasada).
+A proposta atende aos requisitos do trabalho da disciplina ao combinar problema real, solução funcional, interface dinâmica, persistência de dados, autenticação e demonstração prática.
 
-## 3. Arquitetura e Tecnologia
-* **Frontend:** Next.js 14+ (App Router), React, Tailwind CSS.
-* **Backend as a Service (BaaS):** Supabase (PostgreSQL para persistência e Auth para segurança).
-* **Camada de Lógica:** React Hook Form e Zod para integridade de dados e validação de esquemas.
-* **Custom Hooks:** Implementação de `usePets` e `useVacinas` para isolamento de regras de negócio.
+---
 
-## 4. Modelo de Dados Relacional
-O banco de dados PostgreSQL (Supabase) está estruturado para garantir a integridade referencial:
-* **Tabela `pets`**: Entidade principal que armazena dados biométricos e vínculo com o tutor.
-* **Tabela `vacinas`**: Catálogo de imunizantes disponíveis e seus intervalos recomendados.
-* **Tabela `registros`**: Tabela de junção que rastreia aplicações, próximas doses e observações veterinárias.
+## 2. Problema e Oportunidade
 
-## 5. Metodologia e Uso de IA
-O desenvolvimento foi suportado pela ferramenta **Gemini CLI**, atuando como assistente técnico nas seguintes etapas:
-* Modelagem do esquema relacional e políticas de segurança (RLS).
-* Estruturação de componentes reutilizáveis e Design System.
-* Implementação de lógica complexa em Custom Hooks.
-* Refatoração para garantir as melhores práticas de Clean Code e acessibilidade.
+### Problema
+
+Tutores costumam controlar vacinas por cartão físico, anotações soltas ou memória. Isso aumenta o risco de atraso em doses, perda de histórico e dificuldade para acompanhar a saúde preventiva dos animais.
+
+### Oportunidade
+
+Uma plataforma simples, focada em pets, permite organizar o histórico vacinal, reduzir esquecimentos e dar visibilidade imediata ao que está em dia, próximo do vencimento ou atrasado.
+
+### Público-alvo
+
+- Tutores de cães
+- Clínicas pequenas
+- ONGs e projetos de proteção animal
+
+### Proposta de valor
+
+- Centralizar dados do pet
+- Exibir status vacinal de forma clara
+- Facilitar o registro de doses e revisões
+- Preparar o terreno para lembretes e relatórios futuros
+
+---
+
+## 3. Requisitos Funcionais
+
+### RF01 - Autenticação
+
+O sistema permite cadastro, login e isolamento dos dados por usuário autenticado.
+
+### RF02 - Gestão de Pets
+
+O sistema permite criar, listar, editar e excluir pets.
+
+### RF03 - Controle de Vacinação
+
+O sistema registra vacinas, doses aplicadas e próximas datas recomendadas.
+
+### RF04 - Dashboard de Status
+
+O sistema exibe indicadores visuais para pets em dia, próximos da dose e atrasados.
+
+---
+
+## 4. Stack Tecnológica
+
+### Frontend
+
+- Next.js 15 com App Router
+- React 19
+- TypeScript
+- Tailwind CSS
+- Lucide React
+
+### Formulários e validação
+
+- React Hook Form
+- Zod
+
+### Backend e persistência
+
+- Supabase Auth
+- PostgreSQL no Supabase
+- Row Level Security para isolamento de dados
+
+---
+
+## 5. Modelo de Dados
+
+### Tabela `pets`
+
+Armazena os dados principais do animal.
+
+Campos esperados:
+
+- `id`
+- `user_id`
+- `nome`
+- `raca`
+- `data_nascimento`
+- `peso`
+- `foto_url`
+- `created_at`
+
+### Tabela `vacinas`
+
+Catálogo de vacinas disponíveis e intervalos recomendados.
+
+Campos esperados:
+
+- `id`
+- `nome`
+- `descricao`
+- `intervalo_dias`
+- `created_at`
+
+### Tabela `registros`
+
+Registra a aplicação das vacinas em cada pet.
+
+Campos esperados:
+
+- `id`
+- `pet_id`
+- `vacina_id`
+- `data_aplicacao`
+- `proxima_dose`
+- `observacoes`
+- `created_at`
+
+### Relações
+
+- Um usuário possui vários pets
+- Um pet possui vários registros
+- Uma vacina pode aparecer em vários registros
+
+---
+
+## 6. Design System
+
+O projeto adota uma identidade visual própria para garantir consistência em toda a interface.
+
+### Diretrizes
+
+- Tipografia legível e hierarquia clara
+- Paleta com contraste adequado
+- Botões e inputs padronizados
+- Estados visuais para foco, erro e sucesso
+- Layout responsivo para desktop e mobile
+
+### Componentes base
+
+- Botão
+- Campo de texto
+- Card
+- Badge de status
+- Tabela/lista de registros
+
+---
+
+## 7. Custom Hooks
+
+O trabalho prevê pelo menos dois hooks personalizados, com isolamento da regra de negócio.
+
+### `useAuth`
+
+Responsável por autenticação, sessão e proteção de rotas.
+
+### `usePets`
+
+Responsável por CRUD, listagem e filtros de pets.
+
+### `useVacinas`
+
+Responsável por catálogo de vacinas e registros.
+
+### `useRegistrosVacinais`
+
+Responsável por consolidar histórico, status e próximas doses.
+
+---
+
+## 8. Metodologia e Uso de IA
+
+O desenvolvimento foi apoiado pela ferramenta Gemini CLI como assistente técnico, sem substituir a autoria do grupo.
+
+### Uso relatado
+
+- Apoio na modelagem das tabelas
+- Ajuda na organização da arquitetura
+- Apoio na escrita de regras e validações
+- Revisão de clareza textual em documentação
+
+### Limites do uso
+
+- A IA não foi usada como “autora” final
+- O grupo deve entender e defender o código e a documentação
+- Partes geradas ou auxiliadas por IA devem ser revisadas antes da entrega
+
+---
+
+## 9. Padrões de Projeto e Versionamento
+
+### Organização
+
+- Separação por domínio
+- Componentes reutilizáveis
+- Hooks para regras de negócio
+- Tipos centralizados
+
+### Commits
+
+O repositório segue a ideia de Conventional Commits.
+
+Exemplos:
+
+- `feat: adiciona cadastro de pets`
+- `fix: corrige validacao do formulario`
+- `docs: atualiza roteiro da apresentacao`
+
+---
+
+## 10. Entregas Esperadas
+
+### Entregável 1 - Documento de especificação
+
+Este arquivo serve como base para o PDF final com:
+
+- Plano de negócio
+- Requisitos funcionais
+- Modelo de dados
+- Stack
+- Custom hooks
+- Metodologia de IA
+
+### Entregável 2 - Repositório GitHub
+
+O README do repositório deve apresentar:
+
+- nome do projeto
+- descrição
+- tecnologias
+- instruções de execução
+- estrutura do projeto
+
+### Entregável 3 - Apresentação
+
+A apresentação oral deve ter de 7 a 8 slides com demonstração ao vivo do sistema.
+
+---
+
+## 11. Critérios de Alinhamento com o Professor
+
+### Atendido
+
+- Problema real
+- Stack exigida
+- Requisitos funcionais
+- Uso de IA documentado
+- Roteiro de apresentação
+
+### Ainda dependente da implementação
+
+- Sistema rodando ao vivo
+- CRUD real integrado ao Supabase
+- Schema final versionado
+- PDF final assinado via gov.br
+
+---
+
+## 12. Conclusão
+
+O MeuPetDigital está alinhado com a proposta pedagógica da disciplina. A documentação já cobre o núcleo conceitual do projeto e agora precisa ser acompanhada pela implementação real e pela montagem do PDF final da entrega.
+

@@ -66,7 +66,7 @@ Após configurar as variáveis, você precisa criar as tabelas no Supabase.
 
 1. No dashboard, vá para **SQL Editor**
 2. Clique em **New Query**
-3. Cole o script SQL (veja `docs/Documentação.md` para o schema)
+3. Cole o script SQL (veja `../interno/Documentação.md` para o schema)
 4. Clique em **Run**
 
 ### Opção 2: Dashboard UI

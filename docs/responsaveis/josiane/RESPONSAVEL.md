@@ -1,6 +1,6 @@
-# 👤 Responsabilidades - Josiene
+# 👤 Responsabilidades - Josiane
 
-**Role:** QA Analyst / Testes e Qualidade  
+**Role:** QA / Testes e Documentação Final  
 **Email:** [adicionar email]  
 **GitHub:** @[adicionar github]
 
@@ -8,85 +8,49 @@
 
 ## 📋 Responsabilidades Principais
 
-### 🧪 Testes e Qualidade
-- [ ] Testes unitários (Jest + React Testing Library)
-- [ ] Testes de integração
-- [ ] Testes E2E (Playwright/Cypress)
-- [ ] Testes de regressão
-- [ ] Testes de performance
+### 🧪 Testes Manuais do Sistema
+- [ ] Testar fluxo completo de cadastro e login
+- [ ] Testar CRUD de pets (criar, editar, excluir, listar)
+- [ ] Testar registro de vacinas e cálculo da próxima dose
+- [ ] Testar status do dashboard (em dia / próxima / atrasada)
+- [ ] Testar comportamento com dados inválidos nos formulários
 
-### 🐛 Bug Tracking e QA
-- [ ] Triagem de bugs reportados
-- [ ] Criação de cenários de teste
-- [ ] Validação de PRs antes do merge
-- [ ] Smoke tests após deploy
-- [ ] Documentação de bugs conhecidos
+### 🐛 Validação de Qualidade
+- [ ] Verificar se mensagens de erro do Zod aparecem corretamente
+- [ ] Verificar responsividade em telas menores (celular)
+- [ ] Verificar que um usuário não acessa dados de outro (RLS)
+- [ ] Documentar bugs encontrados com print e descrição clara
 
-### 📝 Documentação de Testes
-- [ ] Planos de teste por feature
-- [ ] Casos de teste manuais
-- [ ] Scripts de teste automatizados
-- [ ] Relatórios de qualidade
-- [ ] Checklist de release
-
-### 🎯 Melhorias de Processo
-- [ ] Definição de DoD (Definition of Done)
-- [ ] Checklist de code review
-- [ ] Templates de bug report
-- [ ] Automação de testes críticos
-- [ ] Métricas de qualidade (code coverage)
+### 📝 Documentação da Entrega
+- [ ] Revisar o `docs/interno/Documentação.md` antes da entrega final
+- [ ] Verificar se o README tem todas as instruções corretas
+- [ ] Garantir que o relato de uso de IA está claro e completo
+- [ ] Organizar o PDF final para assinatura via gov.br
 
 ---
 
 ## 📁 Documentos Sob Responsabilidade
 
-| Documento | Status | Última Atualização |
-|-----------|--------|-------------------|
-| [docs/tecnico/TROUBLESHOOTING.md](../../tecnico/TROUBLESHOOTING.md) | 🚧 Revisão contínua | 17/06/2026 |
-| 📝 Plano de Testes (em criação) | 🚧 Em progresso | - |
-| 📝 Relatório de Bugs Conhecidos (planejado) | ⏳ Planejado | - |
+| Documento | Status |
+|-----------|--------|
+| [docs/tecnico/TROUBLESHOOTING.md](../../tecnico/TROUBLESHOOTING.md) | ✅ Completo |
+| PDF final da entrega | ⏳ Pendente |
 
 ---
 
-## 🎯 Tasks Atuais
+## 🎯 Tasks do Trabalho (entrega)
 
-### Sprint 17/06 - 24/06
-- [ ] Criar suite de testes unitários para hooks
-- [ ] Escrever documented test cases para CRUD de pets
-- [ ] Configurar Playwright para testes E2E
-- [ ] Revisar e testar PRs pendentes
-
-### Backlog
-- [ ] Testes de acessibilidade
-- [ ] Testes de performance (Lighthouse)
-- [ ] Automação de smoke tests
-- [ ] Dashboard de code coverage
+- [ ] Executar testes manuais de todos os fluxos principais
+- [ ] Registrar e reportar bugs encontrados à equipe
+- [ ] Consolidar PDF final e encaminhar para assinatura de todos
 
 ---
 
-## 📞 Contato e Disponibilidade
+## 📞 Contato
 
 - **Discord:** [adicionar]
 - **Telegram:** [adicionar]
-- **Horário de Atendimento:** [definir horário]
-- **Tempo de Resposta:** Até 24h úteis
-
----
-
-## 🔗 Links Úteis
-
-- [Central de Documentação](../../index.md)
-- [Plano de Testes (em breve)](./PLANO_TESTES.md)
-- [Bug Tracker](https://github.com/SEU_USUARIO/meupetdigital/labels/bug)
-- [Issues Atribuídas](https://github.com/SEU_USUARIO/meupetdigital/issues?q=is%3Aopen+assignee%3Ajosiene)
-
----
-
-## 💡 Dicas da Josiene
-
-> "Teste cedo, teste frequentemente. Bugs发现的越早, melhor!"
-
-> "Não confie apenas em testes automatizados - explore a aplicação manualmente."
+- **Horário:** [definir]
 
 ---
 

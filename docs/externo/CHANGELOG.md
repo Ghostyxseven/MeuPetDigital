@@ -54,8 +54,8 @@ Baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e segue [
   - Temas claro/escuro (planejado)
 
 - **Tecnologias**
-  - Next.js 14 com App Router
-  - React 18+
+  - Next.js 15 com App Router
+  - React 19
   - TypeScript para type-safety
   - Tailwind CSS para estilização
   - Supabase (PostgreSQL + Auth)
@@ -128,9 +128,9 @@ Cada versão segue este padrão:
 
 ## 🔗 Links
 
-- [Repositório GitHub](https://github.com/SEU_USUARIO/meupetdigital)
-- [Issue Tracker](https://github.com/SEU_USUARIO/meupetdigital/issues)
-- [Documentação Completa](./docs/)
+- [Repositório GitHub](https://github.com/Ghostyxseven/MeuPetDigital)
+- [Issue Tracker](https://github.com/Ghostyxseven/MeuPetDigital/issues)
+- [Documentação Completa](../index.md)
 
 ---
 

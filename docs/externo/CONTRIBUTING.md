@@ -37,13 +37,13 @@ Obrigado pelo seu interesse em contribuir com o MeuPetDigital! Este guia vai te 
 
 ```bash
 # Clone seu fork
-git clone https://github.com/SEU_USUARIO/meupetdigital.git
+git clone https://github.com/Ghostyxseven/MeuPetDigital.git
 
 # Entre no diretório
 cd meupetdigital
 
 # Adicione o remoto original
-git remote add upstream https://github.com/ORIGINAL_OWNER/meupetdigital.git
+git remote add upstream https://github.com/Ghostyxseven/MeuPetDigital.git
 ```
 
 ### 2. Setup do Ambiente
@@ -186,7 +186,7 @@ Depois: [imagem]
 
 - **Issues**: Abra uma issue para bugs ou sugestões
 - **Discussões**: Use as Discord/GitHub Discussions para dúvidas gerais
-- **Email**: Entre em contato via [seu-email@dominio.com]
+- **Email:** Entre em contato via cardosomicaelreis245@gmail.com
 
 ---
 

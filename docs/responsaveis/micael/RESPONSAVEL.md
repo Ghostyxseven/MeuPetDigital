@@ -1,86 +1,55 @@
 # 👤 Responsabilidades - Micael Cardoso Reis
 
-**Role:** Tech Lead / Desenvolvedor Full-Stack  
+**Role:** Tech Lead / Full-Stack  
 **Email:** cardosomicaelreis245@gmail.com  
-**GitHub:** @SEU_USUARIO
+**GitHub:** @Ghostyxseven
 
 ---
 
 ## 📋 Responsabilidades Principais
 
-### 🏗️ Arquitetura e Backend
-- [x] Arquitetura geral do sistema
+### 🏗️ Arquitetura e Configuração Geral
+- [x] Arquitetura geral do sistema (App Router, estrutura de pastas)
+- [x] Configuração inicial do projeto Next.js
 - [x] Configuração do Supabase (Auth + Database)
+- [x] Modelagem de dados (tabelas pets, vacinas, registros)
 - [x] Políticas de Row Level Security (RLS)
-- [x] Modelagem de dados (pets, vacinas, registros)
-- [ ] Otimização de queries do banco de dados
-- [ ] Implementação de APIs restantes
+- [ ] Schema SQL final versionado (`supabase/schema.sql`)
 
-### 🔐 Autenticação e Segurança
-- [x] Sistema de login/registro
-- [x] Recuperação de senha
+### 🔐 Autenticação (`useAuth`)
+- [x] Hook `useAuth` — login, registro, sessão e logout
 - [x] Proteção de rotas autenticadas
-- [ ] 2FA (autenticação de dois fatores)
-- [ ] Auditoria de logs de acesso
+- [ ] Recuperação de senha (fluxo completo)
 
-### 📊 Dashboard e Métricas
-- [x] Dashboard principal de monitoramento
-- [x] Cálculo de status vacinal
-- [ ] Gráficos de evolução de vacinação
-- [ ] Exportação de relatórios em PDF
-- [ ] Notificações por email
-
-### 🧪 Code Quality
-- [x] Configuração do ESLint + Prettier
-- [ ] Setup de testes unitários (Jest)
-- [ ] Setup de testes E2E (Playwright)
-- [ ] CI/CD pipeline (GitHub Actions)
-- [ ] Code review de PRs da equipe
+### 📊 Dashboard Principal
+- [x] Página principal com indicadores de status vacinal
+- [x] Lógica de cálculo: "em dia", "próxima" e "atrasada"
+- [ ] Filtros por status no dashboard
 
 ---
 
 ## 📁 Documentos Sob Responsabilidade
 
-| Documento | Status | Última Atualização |
-|-----------|--------|-------------------|
-| [docs/interno/Documentação.md](../../interno/Documentação.md) | ✅ Completo | 17/06/2026 |
-| [docs/tecnico/VARIAMBIENT.md](../../tecnico/VARIAMBIENT.md) | ✅ Completo | 17/06/2026 |
-| [docs/tecnico/ESTRUTURA.md](../../tecnico/ESTRUTURA.md) | ✅ Completo | 17/06/2026 |
-| [docs/externo/CHANGELOG.md](../../externo/CHANGELOG.md) | ✅ Completo | 17/06/2026 |
+| Documento | Status |
+|-----------|--------|
+| [docs/interno/Documentação.md](../../interno/Documentação.md) | ✅ Completo |
+| [docs/tecnico/ESTRUTURA.md](../../tecnico/ESTRUTURA.md) | ✅ Completo |
+| [docs/externo/CHANGELOG.md](../../externo/CHANGELOG.md) | ✅ Completo |
 
 ---
 
-## 🎯 Tasks Atuais
+## 🎯 Tasks do Trabalho (entrega)
 
-### Sprint 17/06 - 24/06
-- [ ] Implementar notificações email
-- [ ] Criar endpoint de exportação PDF
-- [ ] Revisar PRs pendentes
-- [ ] Otimizar queries de listagem de pets
-
-### Backlog
-- [ ] Integrar com WhatsApp para lembretes
-- [ ] Modo escuro da aplicação
-- [ ] Upload de fotos dos pets
-- [ ] Multi-idioma (PT/EN/ES)
+- [ ] Criar `supabase/schema.sql` com todas as tabelas e políticas RLS
+- [ ] Garantir que o sistema roda do zero com `npm install` + `.env.local`
+- [ ] Revisar e aprovar PRs dos outros membros antes da entrega
 
 ---
 
-## 📞 Contato e Disponibilidade
+## 📞 Contato
 
-- **Discord:** `micael#0000` (adicionar)
 - **Telegram:** [@micaelreis](https://t.me/micaelreis)
-- **Horário de Atendimento:** Seg-Sex, 14h-22h
-- **Tempo de Resposta:** Até 24h úteis
-
----
-
-## 🔗 Links Úteis
-
-- [Central de Documentação](../../index.md)
-- [Guia de Contribuição](../../externo/CONTRIBUTING.md)
-- [Issues Atribuídas](https://github.com/SEU_USUARIO/meupetdigital/issues?q=is%3Aopen+assignee%3ASEU_USUARIO)
-- [PRs em Review](https://github.com/SEU_USUARIO/meupetdigital/pulls?q=is%3Aopen+reviewed-by%3ASEU_USUARIO)
+- **Horário:** Seg-Sex, 14h-22h
 
 ---
 

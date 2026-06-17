@@ -1,6 +1,6 @@
 # 👤 Responsabilidades - Marcos
 
-**Role:** Desenvolvedor Back-End / DevOps  
+**Role:** Back-End / Banco de Dados  
 **Email:** [adicionar email]  
 **GitHub:** @[adicionar github]
 
@@ -8,85 +8,45 @@
 
 ## 📋 Responsabilidades Principais
 
-### ☁️ Infraestrutura e DevOps
-- [ ] Configuração de ambiente de produção
-- [ ] Deploy automatizado (Vercel/Railway)
-- [ ] CI/CD pipelines
-- [ ] Monitoramento (logs, métricas, alertas)
-- [ ] Backup de banco de dados
+### 🗄️ Banco de Dados e Supabase
+- [ ] Revisar e validar o schema SQL das tabelas (`pets`, `vacinas`, `registros`)
+- [ ] Popular o banco com dados de teste (seed) usando Supabase ou script
+- [ ] Testar as políticas de RLS — garantir que usuários só veem seus dados
+- [ ] Verificar integridade das relações (chaves estrangeiras, constraints)
 
-### 🗄️ Database e Performance
-- [ ] Otimização de queries PostgreSQL
-- [ ] Índices estratégicos
-- [ ] Cache (Redis)
-- [ ] Migrações de banco de dados
-- [ ] Backup automatizado
+### 🔌 Integração Front-End ↔ Supabase
+- [ ] Configurar o cliente Supabase (`src/lib/supabase/client.ts`)
+- [ ] Hook `useVacinas` — busca o catálogo de vacinas do banco
+- [ ] Testar as queries de leitura/escrita do CRUD no banco real
 
-### 🔌 APIs e Integrações
-- [ ] API REST para apps móveis
-- [ ] Webhooks para integrações
-- [ ] Integração com serviços de email (SendGrid, AWS SES)
-- [ ] Integração com WhatsApp API
-- [ ] Rate limiting e throttling
-
-### 🔒 Segurança e Compliance
-- [ ] HTTPS/SSL configurations
-- [ ] Sanitização de inputs
-- [ ] Prevenção contra SQL injection
-- [ ] CORS policies
-- [ ] LGPD compliance
+### ☁️ Deploy e Ambiente
+- [ ] Configurar variáveis de ambiente na Vercel
+- [ ] Garantir que o deploy em produção funciona sem erros
+- [ ] Verificar que a URL do Supabase e a chave anon estão corretas na produção
 
 ---
 
 ## 📁 Documentos Sob Responsabilidade
 
-| Documento | Status | Última Atualização |
-|-----------|--------|-------------------|
-| [docs/tecnico/VARIAMBIENT.md](../../tecnico/VARIAMBIENT.md) | 🚧 Revisão necessária | 17/06/2026 |
-| 📝 Guia de Deploy (em criação) | ⏳ Planejado | - |
-| 📝 Playbook de Incidentes (planejado) | ⏳ Planejado | - |
+| Documento | Status |
+|-----------|--------|
+| [docs/tecnico/VARIAMBIENT.md](../../tecnico/VARIAMBIENT.md) | ✅ Completo |
 
 ---
 
-## 🎯 Tasks Atuais
+## 🎯 Tasks do Trabalho (entrega)
 
-### Sprint 17/06 - 24/06
-- [ ] Configurar ambiente de produção na Vercel
-- [ ] Setup de backup automático do Supabase
-- [ ] Criar pipeline de deploy automatizado
-- [ ] Configurar monitoramento de erros (Sentry)
-
-### Backlog
-- [ ] Implementar cache Redis
-- [ ] Integração com SendGrid para emails
-- [ ] API rate limiting
-- [ ] Dashboard de métricas (Grafana)
+- [ ] Banco de dados funcionando com dados reais no Supabase
+- [ ] RLS validada — cada usuário vê apenas seus pets e registros
+- [ ] Sistema deployado e acessível via URL pública (Vercel)
 
 ---
 
-## 📞 Contato e Disponibilidade
+## 📞 Contato
 
 - **Discord:** [adicionar]
 - **Telegram:** [adicionar]
-- **Horário de Atendimento:** [definir horário]
-- **Tempo de Resposta:** Até 24h úteis
-
----
-
-## 🔗 Links Úteis
-
-- [Central de Documentação](../../index.md)
-- [Status do Deploy](https://meupetdigital.vercel.app) (em breve)
-- [Supabase Dashboard](https://supabase.com/dashboard)
-- [Issues Atribuídas](https://github.com/SEU_USUARIO/meupetdigital/issues?q=is%3Aopen+assignee%3Amarcos)
-
----
-
-## 💡 Dicas do Marcos
-
-> "Sempre faça backup antes de rodar migrações em produção!"
-
-> "Monitore tudo: o que não é medido não pode ser melhorado."
+- **Horário:** [definir]
 
 ---
 

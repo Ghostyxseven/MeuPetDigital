@@ -1,6 +1,6 @@
 # 👤 Responsabilidades - Carlos
 
-**Role:** Desenvolvedor Full-Stack / Features  
+**Role:** Full-Stack / Features de Pets e Vacinação  
 **Email:** [adicionar email]  
 **GitHub:** @[adicionar github]
 
@@ -8,85 +8,48 @@
 
 ## 📋 Responsabilidades Principais
 
-### 🐕 Features de Pets
-- [ ] CRUD completo de pets
-- [ ] Upload e compressão de fotos
-- [ ] Validação de dados biométricos
-- [ ] Histórico de saúde do pet
-- [ ] Exportação de perfil do pet
+### 🐕 CRUD de Pets
+- [ ] Página de listagem de pets (`/pets`)
+- [ ] Formulário de cadastro de pet com React Hook Form + Zod (`/pets/novo`)
+- [ ] Página de detalhes/edição de pet (`/pets/[id]`)
+- [ ] Excluir pet com confirmação
+- [ ] Hook `usePets` — CRUD completo integrado ao Supabase
 
-### 💉 Features de Vacinação
-- [ ] Catálogo de vacinas (CRUD admin)
-- [ ] Registro de doses aplicadas
-- [ ] Cálculo de próximas doses
-- [ ] Alertas de vacinação próxima
-- [ ] Histórico vacinal completo
+### 💉 Registro de Vacinação
+- [ ] Formulário de registro de dose aplicada (`/vacinas/registrar`)
+- [ ] Hook `useRegistrosVacinais` — histórico + cálculo de próxima dose
+- [ ] Listagem de registros vacinais por pet
+- [ ] Validação de campos obrigatórios (data de aplicação, vacina selecionada)
 
-### 📱 Funcionalidades Mobile-First
-- [ ] Navegação mobile otimizada
-- [ ] Touch gestures
-- [ ] Offline-first (PWA)
-- [ ] Push notifications
-- [ ] App install prompt
-
-### 🎨 Features Gerais
-- [ ] Modo escuro/claro
-- [ ] Configurações de usuário
-- [ ] Preferências de notificação
-- [ ] Multi-pets dashboard
-- [ ] Busca e filtros avançados
+### 📋 Validação de Formulários
+- [ ] Schemas Zod para pet (`nome`, `raça`, `data_nascimento`, `peso`)
+- [ ] Schemas Zod para registro vacinal (`pet_id`, `vacina_id`, `data_aplicacao`)
+- [ ] Mensagens de erro claras e visíveis ao usuário
 
 ---
 
 ## 📁 Documentos Sob Responsabilidade
 
-| Documento | Status | Última Atualização |
-|-----------|--------|-------------------|
-| [docs/interno/Documentação.md](../../interno/Documentação.md) | 🚧 Atualização de features | 17/06/2026 |
-| 📝 Guia de Features (em criação) | 🚧 Em progresso | - |
-| 📝 API Reference (planejado) | ⏳ Planejado | - |
+| Documento | Status |
+|-----------|--------|
+| [docs/interno/Documentação.md](../../interno/Documentação.md) | 🚧 Atualizar com validações Zod implementadas |
 
 ---
 
-## 🎯 Tasks Atuais
+## 🎯 Tasks do Trabalho (entrega)
 
-### Sprint 17/06 - 24/06
-- [ ] Implementar upload de fotos de pets
-- [ ] Criar catálogo de vacinas editável
-- [ ] Desenvolver filtros avançados de busca
-- [ ] Melhorar responsividade do dashboard
-
-### Backlog
-- [ ] PWA com offline support
-- [ ] Notificações push
-- [ ] Modo escuro
-- [ ] Exportação de histórico em PDF
+- [ ] CRUD de pets funcionando do início ao fim no banco real
+- [ ] Registro de vacina funcionando com cálculo de próxima dose
+- [ ] Formulários com validação Zod exibindo erros corretamente
+- [ ] Pelo menos 2 Custom Hooks implementados (`usePets` + `useRegistrosVacinais`)
 
 ---
 
-## 📞 Contato e Disponibilidade
+## 📞 Contato
 
 - **Discord:** [adicionar]
 - **Telegram:** [adicionar]
-- **Horário de Atendimento:** [definir horário]
-- **Tempo de Resposta:** Até 24h úteis
-
----
-
-## 🔗 Links Úteis
-
-- [Central de Documentação](../../index.md)
-- [Roadmap de Features](./ROADMAP_FEATURES.md) (em breve)
-- [Issues Atribuídas](https://github.com/SEU_USUARIO/meupetdigital/issues?q=is%3Aopen+assignee%3Acarlos)
-- [Features em Desenvolvimento](https://github.com/SEU_USUARIO/meupetdigital/labels/feature)
-
----
-
-## 💡 Dicas do Carlos
-
-> "Sempre pense mobile-first. A maioria dos usuários acessa pelo celular!"
-
-> "Features são como plantas: precisam de cuidado constante, não só no plantio."
+- **Horário:** [definir]
 
 ---
 

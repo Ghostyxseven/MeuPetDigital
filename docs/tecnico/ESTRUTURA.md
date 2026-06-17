@@ -1,89 +1,64 @@
 # 📁 Estrutura de Pastas do MeuPetDigital
 
-Este documento descreve a organização do código-fonte do projeto.
+Este documento descreve a organização do código-fonte do projeto, seguindo a **Vertical Slice Architecture** (Arquitetura baseada em Features).
 
 ```
 meupetdigital/
 ├── 📁 .github/                  # Configurações do GitHub
 │   └── workflows/               # CI/CD pipelines
 │
-├── 📁 .husky/                   # Git hooks (pre-commit, pre-push)
-│
 ├── 📁 docs/                     # Documentação do projeto
-│   ├── Documentação.md          # Doc técnica principal
-│   ├── ESTRUTURA.md             # Este arquivo
-│   ├── VARIAMBIENT.md           # Variáveis de ambiente
-│   └── TROUBLESHOOTING.md       # Problemas comuns
+│   ├── index.md                 # Índice geral da documentação
+│   ├── interno/                 # Documentação interna
+│   │   └── Documentação.md       # Doc técnica principal
+│   ├── tecnico/                 # Documentação técnica
+│   │   ├── ESTRUTURA.md           # Este arquivo
+│   │   ├── VARIAMBIENT.md         # Variáveis de ambiente
+│   │   └── TROUBLESHOOTING.md     # Problemas comuns
+│   ├── externo/                 # Documentação externa
+│   │   ├── CONTRIBUTING.md        # Guia de contribuição
+│   │   └── CHANGELOG.md           # Histórico de versões
+│   └── responsaveis/            # Docs por membro da equipe
+│       ├── micael/
+│       ├── gisele/
+│       ├── marcos/
+│       ├── josiane/
+│       └── carlos/
 │
 ├── 📁 public/                   # Arquivos estáticos públicos
 │   ├── favicon.ico              # Ícone da aplicação
-│   ├── logo.png                 # Logo do PetVacina
+│   ├── logo.png                 # Logo do MeuPetDigital
 │   └── images/                  # Imagens gerais
 │
 ├── 📁 src/                      # Código-fonte principal
-│   ├── 📁 app/                  # Next.js App Router
+│   ├── 📁 app/                  # Next.js App Router (Apenas Roteamento)
 │   │   ├── layout.tsx           # Layout root da aplicação
-│   │   ├── page.tsx             # Página inicial (dashboard)
-│   │   ├── login/               # Módulo de autenticação
-│   │   │   └── page.tsx         # Página de login
-│   │   ├── registro/            # Módulo de cadastro
-│   │   │   └── page.tsx         # Página de registro
-│   │   ├── pets/                # Módulo de gestão de pets
-│   │   │   ├── page.tsx         # Lista de pets
-│   │   │   ├── novo/            # Cadastro de pet
-│   │   │   │   └── page.tsx
-│   │   │   └── [id]/            # Detalhes do pet
-│   │   │       └── page.tsx
-│   │   ├── vacinas/             # Módulo de vacinação
-│   │   │   ├── page.tsx         # Lista de vacinas
-│   │   │   └── registrar/       # Registro de vacinação
-│   │   │       └── page.tsx
-│   │   └── api/                 # API routes (se necessário)
+│   │   ├── page.tsx             # Página inicial
+│   │   ├── login/               # Rota de login
+│   │   ├── pets/                # Rotas de gestão de pets
+│   │   └── vacinas/             # Rotas de vacinação
 │   │
-│   ├── 📁 components/           # Componentes React reutilizáveis
-│   │   ├── ui/                  # Componentes de UI base
-│   │   │   ├── Button.tsx       # Botão customizado
-│   │   │   ├── Card.tsx         # Card container
-│   │   │   ├── Input.tsx        # Campo de input
-│   │   │   └── Modal.tsx        # Modal/Dialog
-│   │   ├── pet/                 # Componentes específicos de Pet
-│   │   │   ├── PetCard.tsx      # Card de pet
-│   │   │   ├── PetForm.tsx      # Formulário de pet
-│   │   │   └── PetList.tsx      # Lista de pets
-│   │   ├── vacina/              # Componentes específicos de Vacina
-│   │   │   ├── VacinaCard.tsx   # Card de vacina
-│   │   │   ├── VacinaForm.tsx   # Formulário de vacina
-│   │   │   └── StatusBadge.tsx  # Badge de status
-│   │   └── layout/              # Componentes de layout
-│   │       ├── Header.tsx       # Cabeçalho
-│   │       ├── Footer.tsx       # Rodapé
-│   │       ├── Sidebar.tsx      # Menu lateral
-│   │       └── Navbar.tsx       # Barra de navegação
+│   ├── 📁 core/                 # Código Global e Compartilhado
+│   │   ├── components/          # Componentes genéricos (ui base, botões, inputs, cards)
+│   │   ├── lib/                 # Utilitários globais e Supabase client
+│   │   ├── hooks/               # Hooks globais não atrelados a um domínio
+│   │   └── types/               # Tipos globais genéricos
 │   │
-│   ├── 📁 hooks/                # Custom React Hooks
-│   │   ├── usePets.ts           # Lógica de pets (CRUD)
-│   │   ├── useVacinas.ts        # Lógica de vacinas (CRUD)
-│   │   ├── useAuth.ts           # Lógica de autenticação
-│   │   └── useStatus.ts         # Cálculo de status vacinal
-│   │
-│   ├── 📁 lib/                  # Utilitários e configurações
-│   │   ├── supabase/            # Configuração do Supabase
-│   │   │   └── client.ts        # Cliente Supabase
-│   │   ├── utils/               # Funções utilitárias
-│   │   │   ├── formatDate.ts    # Formatação de datas
-│   │   │   ├── calculateStatus.ts # Cálculo de status
-│   │   │   └── validators.ts    # Validações diversas
-│   │   └── constants.ts         # Constantes do projeto
-│   │
-│   ├── 📁 types/                # Definições de tipos TypeScript
-│   │   ├── pet.ts               # Tipos relacionados a Pet
-│   │   ├── vacina.ts            # Tipos relacionados a Vacina
-│   │   ├── registro.ts          # Tipos relacionados a Registro
-│   │   └── index.ts             # Exportação de todos os tipos
-│   │
-│   └── 📁 styles/               # Estilização global
-│       ├── globals.css          # Estilos globais
-│       └── theme.ts             # Configuração do tema
+│   └── 📁 features/             # Vertical Slices (Agrupado por Domínio de Negócio)
+│       ├── 📁 auth/             # Módulo de Autenticação
+│       │   ├── components/      # LoginForm, RegisterForm
+│       │   ├── hooks/           # useAuth
+│       │   └── types.ts         # Auth types
+│       │
+│       ├── 📁 pets/             # Módulo de Gestão de Pets
+│       │   ├── components/      # PetCard, PetForm, PetList
+│       │   ├── hooks/           # usePets
+│       │   └── types.ts         # Pet types
+│       │
+│       └── 📁 vacinas/          # Módulo de Vacinação e Registros
+│           ├── components/      # VacinaCard, RegistroForm, StatusBadge
+│           ├── hooks/           # useVacinas, useRegistrosVacinais
+│           └── types.ts         # Vacina e Registro types
 │
 ├── 📁 tests/                    # Testes automatizados
 │   ├── unit/                    # Testes unitários
@@ -108,46 +83,17 @@ meupetdigital/
 ## 📂 Descrição dos Diretórios
 
 ### `/src/app/`
-Contém todas as páginas da aplicação usando **App Router** do Next.js 14+. Cada subdiretório representa uma rota da aplicação.
+Responsável **apenas** pelo roteamento e layouts da aplicação usando **App Router** do Next.js 15. Aqui não vai lógica de negócio complexa, apenas a "casca" que consome os componentes da pasta `features/`.
 
-**Convenções:**
-- `page.tsx`: Arquivo principal de cada rota
-- `layout.tsx`: Layout específico da rota
-- `[id]`: Parâmetro dinâmico (ex: `/pets/123`)
+### `/src/core/`
+Contém tudo que é **global** e compartilhado por toda a aplicação:
+- `components/`: UI Base do Design System (Botões, Inputs, Cards).
+- `lib/`: Configurações como o cliente do Supabase e funções utilitárias isoladas.
 
-### `/src/components/`
-Componentes React reutilizáveis divididos por categoria:
-
-- **`ui/`**: Componentes genéricos (botões, inputs, cards)
-- **`pet/`**: Componentes específicos do domínio de Pets
-- **`vacina/`**: Componentes específicos do domínio de Vacinas
-- **`layout/`**: Componentes estruturais (header, footer, nav)
-
-### `/src/hooks/`
-Custom Hooks que encapsulam lógica de negócio e chamadas ao Supabase:
-
-| Hook | Responsabilidade |
-|------|-----------------|
-| `usePets` | CRUD de pets, busca, filtros |
-| `useVacinas` | CRUD de vacinas e registros |
-| `useAuth` | Autenticação e sessão do usuário |
-| `useStatus` | Cálculo de status vacinal |
-
-### `/src/lib/`
-Biblioteca de utilitários e configurações:
-
-- **`supabase/`**: Cliente e configurações do Supabase
-- **`utils/`**: Funções puras de formatação e cálculo
-- **`constants.ts`**: Valores constantes (status, cores, etc.)
-
-### `/src/types/`
-Definições de tipos TypeScript para type-safety em todo o projeto.
-
-### `/tests/`
-Suite de testes separada por tipo:
-- **Unitários**: Testam funções e componentes isolados
-- **Integração**: Testam interação entre módulos
-- **E2E**: Testam fluxos completos do usuário
+### `/src/features/` (Vertical Slices)
+Onde mora a **Vertical Slice Architecture**. O código é agrupado pelo **contexto de negócio** em vez de por tipo de arquivo.
+- Cada feature (`auth`, `pets`, `vacinas`) tem seus próprios componentes, hooks, tipos e lógicas.
+- Isso torna o código extremamente fácil de manter e escalar, evitando conflitos na hora do desenvolvimento em equipe.
 
 ---
 
@@ -180,19 +126,16 @@ NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbG...
 
 ---
 
-## 📐 Princípios de Organização
+## 📐 Princípios da Vertical Slice
 
-### 1. **Separação por Domínio**
-Componentes e hooks são organizados por funcionalidade (pets, vacinas, auth).
+### 1. Alta Coesão
+Tudo relacionado a um recurso (ex: pets) fica na mesma pasta (`src/features/pets`). Se você precisar alterar algo sobre pets, não precisa pular por várias pastas diferentes.
 
-### 2. **Reutilização**
-Componentes de UI genéricos ficam em `/components/ui/` para uso em toda a aplicação.
+### 2. Baixo Acoplamento
+Um módulo (ex: `pets`) não deve acessar o interior de outro módulo diretamente de forma confusa. O que for comum a ambos deve subir para o `core/`.
 
-### 3. **Type-Safety**
-Todos os tipos centralizados em `/src/types/` para importar facilmente.
-
-### 4. **Testabilidade**
-Código modular facilita testes unitários e de integração.
+### 3. Divisão de Trabalho Facilitada
+Como a estrutura reflete os domínios do negócio, cada desenvolvedor (Micael, Gisele, Marcos, Carlos) trabalha em suas pastas específicas, minimizando conflitos de merge (Merge Conflicts).
 
 ---
 

@@ -14,7 +14,7 @@ docs/
 │   ├── micael/                 # Tech Lead
 │   ├── gisele/                 # Front-End / UX
 │   ├── marcos/                 # Back-End / DevOps
-│   ├── josiene/                # QA / Testes
+│   ├── josiane/                # QA / Testes
 │   └── carlos/                 # Full-Stack / Features
 ├── 📁 tecnico/                 # Documentação técnica para desenvolvedores
 │   ├── ESTRUTURA.md            # Estrutura de pastas do projeto
@@ -50,8 +50,8 @@ Consulte:
 
 - **[externo/CHANGELOG.md](./externo/CHANGELOG.md)** - Todas as versões e mudanças
 
-### 🎓 Sou Avaliador ou Visitante
-Comece por:
+### 🎤 Sou Avaliador ou Visitante
+Começe por:
 
 - **[interno/Documentação.md](./interno/Documentação.md)** - Visão geral completa do projeto
 - **[../README.md](../README.md)** - Retorne ao README principal
@@ -69,7 +69,7 @@ Comece por:
 | [micael/](./responsaveis/micael/) | Tech Lead - Arquitetura, Backend, Security |
 | [gisele/](./responsaveis/gisele/) | Front-End - Componentes, UX/UI, Acessibilidade |
 | [marcos/](./responsaveis/marcos/) | Back-End - Infra, Database, APIs |
-| [josiene/](./responsaveis/josiene/) | QA - Testes, Qualidade, Bug Tracking |
+| [josiane/](./responsaveis/josiane/) | QA - Testes, Qualidade, Bug Tracking |
 | [carlos/](./responsaveis/carlos/) | Features - CRUD Pets, Vacinas, Mobile |
 
 ### `/docs/tecnico/` - Documentação Técnica
@@ -103,7 +103,7 @@ Comece por:
 ### Setup Rápido
 ```bash
 # 1. Clone
-git clone https://github.com/SEU_USUARIO/meupetdigital.git
+git clone https://github.com/Ghostyxseven/MeuPetDigital.git
 cd meupetdigital
 
 # 2. Instale
@@ -119,8 +119,8 @@ npm run dev
 
 ### Recursos Úteis
 - 🏠 [README Principal](../README.md)
-- 🐛 [Reportar Bugs](https://github.com/SEU_USUARIO/meupetdigital/issues)
-- 💬 [Discussions](https://github.com/SEU_USUARIO/meupetdigital/discussions)
+- 🐛 [Reportar Bugs](https://github.com/Ghostyxseven/MeuPetDigital/issues)
+- 💬 [Discussions](https://github.com/Ghostyxseven/MeuPetDigital/discussions)
 - 📧 [Contato](mailto:cardosomicaelreis245@gmail.com)
 
 ---
