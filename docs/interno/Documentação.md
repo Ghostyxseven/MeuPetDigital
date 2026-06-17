@@ -38,6 +38,7 @@ Uma plataforma simples, focada em pets, permite organizar o histórico vacinal, 
 - Exibir status vacinal de forma clara
 - Facilitar o registro de doses e revisões
 - Preparar o terreno para lembretes e relatórios futuros
+- Possibilitar a vinculação do pet ao **SinPatinhas** (Cadastro Nacional de Animais Domésticos do Governo Federal)
 
 ---
 
@@ -99,6 +100,7 @@ Campos esperados:
 - `data_nascimento`
 - `peso`
 - `foto_url`
+- `rg_sinpatinhas` (Opcional - Link/QR Code do documento oficial do governo)
 - `created_at`
 
 ### Tabela `vacinas`
