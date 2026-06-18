@@ -255,21 +255,35 @@ A apresentação oral deve ter de 7 a 8 slides com demonstração ao vivo do sis
 ### Atendido
 
 - Problema real
-- Stack exigida
-- Requisitos funcionais
+- Stack exigida definida
+- Requisitos funcionais especificados
 - Uso de IA documentado
-- Roteiro de apresentação
+- Documentação acadêmica completa
+- Estrutura de pastas definida (Vertical Slice Architecture)
+- Divisão de responsabilidades por membro da equipe
 
-### Ainda dependente da implementação
+### Pendente (depende da implementação)
 
+- Inicialização do projeto Next.js (package.json, configs)
 - Sistema rodando ao vivo
 - CRUD real integrado ao Supabase
-- Schema final versionado
+- Schema SQL final versionado (supabase/schema.sql)
+- Row Level Security configurada e validada
 - PDF final assinado via gov.br
 
 ---
 
-## 12. Conclusão
+## 12. Equipe
+
+- **Micael Cardoso Reis** — Tech Lead / Full-Stack ([@Ghostyxseven](https://github.com/Ghostyxseven))
+- **Gisele** — Front-End / Design System ([@Gisele002](https://github.com/Gisele002))
+- **Marcos Vinícius** — Back-End / Banco de Dados ([@MarcsVinny](https://github.com/MarcsVinny))
+- **Antonio Carlos** — Full-Stack / Features ([@gomes738](https://github.com/gomes738))
+- **Josiane** — QA / Testes e Documentação Final ([@Josiane10](https://github.com/Josiane10))
+
+---
+
+## 13. Conclusão
 
 O MeuPetDigital está alinhado com a proposta pedagógica da disciplina. A documentação já cobre o núcleo conceitual do projeto e agora precisa ser acompanhada pela implementação real e pela montagem do PDF final da entrega.
 

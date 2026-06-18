@@ -62,14 +62,18 @@ Acesse `http://localhost:3000`.
 ## Estrutura
 
 ```text
-src/app                 Rotas do Next.js
-src/components          Componentes reutilizaveis
-src/hooks               Custom hooks de negocio
-src/lib/supabase        Cliente Supabase
-src/lib/utils           Validadores e regras auxiliares
-src/types               Tipos TypeScript
-supabase/schema.sql     Modelo de dados e politicas RLS
-docs                    Documentacao academica e tecnica
+src/app                 Rotas do Next.js (App Router)
+src/core/               Codigo global e compartilhado
+  components/           Componentes genericos (UI base)
+  lib/                  Utilitarios e cliente Supabase
+  hooks/                Hooks globais
+  types/                Tipos globais
+src/features/           Vertical Slices (por dominio de negocio)
+  auth/                 Autenticacao (componentes, hooks, tipos)
+  pets/                 Gestao de pets (componentes, hooks, tipos)
+  vacinas/              Vacinacao e registros (componentes, hooks, tipos)
+supabase/schema.sql     Modelo de dados e politicas RLS (a criar)
+docs/                   Documentacao academica e tecnica
 ```
 
 ## Entrega academica
@@ -78,8 +82,8 @@ A documentacao oficial esta em `docs/interno/Documentação.md`. O roteiro da ap
 
 ## Equipe
 
-- Micael Cardoso Reis
-- Gisele
-- Marcos
-- Josiane
-- Carlos
+- **Micael Cardoso Reis** — Tech Lead / Full-Stack ([@Ghostyxseven](https://github.com/Ghostyxseven))
+- **Gisele** — Front-End / Design System ([@Gisele002](https://github.com/Gisele002))
+- **Marcos Vinícius** — Back-End / Banco de Dados ([@MarcsVinny](https://github.com/MarcsVinny))
+- **Antonio Carlos** — Full-Stack / Features ([@gomes738](https://github.com/gomes738))
+- **Josiane** — QA / Testes e Documentação Final ([@Josiane10](https://github.com/Josiane10))
