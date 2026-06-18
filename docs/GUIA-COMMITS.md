@@ -53,26 +53,28 @@ git push origin feature/carlos-crud-pets
 
 ## ✍️ Como escrever a mensagem do commit
 
-O padrão é: **`tipo: descrição curta do que foi feito`**
+O padrão é **Conventional Commits**: `tipo: descrição curta do que foi feito`
 
 | Tipo | Quando usar |
 |------|------------|
-| `funcionalidade` | Adicionou uma funcionalidade nova |
-| `correcao` | Corrigiu um bug |
-| `estilo` | Mudança visual (CSS, layout) sem lógica |
-| `documentacao` | Atualizou algum documento |
-| `refatoracao` | Reorganizou código sem mudar o que ele faz |
-| `configuracao` | Configuração, dependências, setup |
+| `feat` | Adicionou uma funcionalidade nova |
+| `fix` | Corrigiu um bug |
+| `style` | Mudança visual (CSS, layout) sem lógica |
+| `docs` | Atualizou algum documento |
+| `refactor` | Reorganizou código sem mudar o que ele faz |
+| `chore` | Configuração, dependências, setup |
+| `test` | Adicionou ou modificou testes |
 
 ### ✅ Exemplos certos
 
 ```
-funcionalidade: cria formulário de cadastro de pet
-funcionalidade: adiciona hook usePets com CRUD completo
-correcao: corrige validação do campo data_nascimento
-estilo: ajusta cores do badge de status
-documentacao: atualiza README com instruções de execução
-configuração: adiciona variáveis de ambiente no .env.example
+feat: cria formulário de cadastro de pet
+feat: adiciona hook usePets com CRUD completo
+fix: corrige validação do campo data_nascimento
+style: ajusta cores do badge de status
+docs: atualiza README com instruções de execução
+chore: adiciona variáveis de ambiente no .env.example
+test: adiciona testes do hook useAuth
 ```
 
 ### ❌ Exemplos errados

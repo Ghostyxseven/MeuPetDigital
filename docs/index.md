@@ -51,7 +51,7 @@ Consulte:
 - **[externo/CHANGELOG.md](./externo/CHANGELOG.md)** - Todas as versões e mudanças
 
 ### 🎤 Sou Avaliador ou Visitante
-Começe por:
+Comece por:
 
 - **[interno/Documentação.md](./interno/Documentação.md)** - Visão geral completa do projeto
 - **[../README.md](../README.md)** - Retorne ao README principal
@@ -66,11 +66,11 @@ Começe por:
 | Documento | Descrição |
 |-----------|-----------|
 | [index.md](./responsaveis/index.md) | Visão geral da equipe e matriz de responsabilidades |
-| [micael/](./responsaveis/micael/) | Tech Lead - Arquitetura, Backend, Security |
-| [gisele/](./responsaveis/gisele/) | Front-End - Componentes, UX/UI, Acessibilidade |
-| [marcos/](./responsaveis/marcos/) | Back-End - Infra, Database, APIs |
-| [josiane/](./responsaveis/josiane/) | QA - Testes, Qualidade, Bug Tracking |
-| [carlos/](./responsaveis/carlos/) | Features - CRUD Pets, Vacinas, Mobile |
+| [micael/](./responsaveis/micael/) | Micael Cardoso Reis - Tech Lead, Arquitetura, Backend, Security |
+| [gisele/](./responsaveis/gisele/) | Gisele - Front-End, Componentes, UX/UI, Acessibilidade |
+| [marcos/](./responsaveis/marcos/) | Marcos Vinícius - Back-End, Infra, Database, APIs |
+| [josiane/](./responsaveis/josiane/) | Josiane - QA, Testes, Qualidade, Bug Tracking |
+| [carlos/](./responsaveis/carlos/) | Antonio Carlos - Full-Stack, CRUD Pets, Vacinas, Mobile |
 
 ### `/docs/tecnico/` - Documentação Técnica
 **Público-alvo:** Desenvolvedores e equipe técnica
@@ -156,7 +156,7 @@ Esta documentação é mantida pela equipe do MeuPetDigital. Para sugerir mudan�
 
 ---
 
-**Última atualização:** 17 de Junho de 2026  
+**Última atualização:** 18 de Junho de 2026  
 **Mantenedor:** Micael Cardoso Reis  
 **Contato:** cardosomicaelreis245@gmail.com
 

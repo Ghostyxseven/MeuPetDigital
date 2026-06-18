@@ -66,7 +66,7 @@ Após configurar as variáveis, você precisa criar as tabelas no Supabase.
 
 1. No dashboard, vá para **SQL Editor**
 2. Clique em **New Query**
-3. Cole o script SQL (veja `../interno/Documentação.md` para o schema)
+3. Cole o script SQL (veja `../../interno/Documentação.md` para o modelo de dados; o arquivo `supabase/schema.sql` será criado futuramente)
 4. Clique em **Run**
 
 ### Opção 2: Dashboard UI
@@ -176,7 +176,7 @@ cp .env.local.example .env.local
 
 ### ❌ Não Faça
 
-- ✅Nunca** versionar `.env.local` no Git
+- **Nunca** versionar `.env.local` no Git
 - **Nunca** compartilhe chaves `service_role` no client-side
 - **Nunca** use credenciais de produção em desenvolvimento
 

@@ -27,4 +27,4 @@ Esta pasta contém documentação **interna** do projeto, voltada para a equipe 
 
 ---
 
-**Última atualização:** 17 de Junho de 2026
+**Última atualização:** 18 de Junho de 2026

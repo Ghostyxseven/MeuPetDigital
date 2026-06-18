@@ -10,82 +10,66 @@ Baseado em [Keep a Changelog](https://keepachangelog.com/pt-BR/1.0.0/) e segue [
 
 ### Adicionado
 - Documentação completa do projeto (CONTRIBUTING.md, ESTRUTURA.md, VARIAMBIENT.md, TROUBLESHOOTING.md)
+- GUIA-COMMITS.md com padrão Conventional Commits
 - Este CHANGELOG.md para versionamento
-
-### Planejado
-- Implementação de notificações por email para vacinas próximas
-- Exportação de histórico vacinal em PDF
-- Integração com API de lembretes (WhatsApp/SMS)
-- Dashboard com estatísticas de vacinação
+- Estrutura de pastas do projeto (src/app, src/core, src/features)
+- Arquivos types.ts base para auth, pets e vacinas
+- Documentação por responsável (docs/responsaveis/)
+- README.md com descrição, tecnologias e estrutura do projeto
 
 ---
 
-## [1.0.0] - 2026-06-17
+## [0.1.0] - 2026-06-17
 
 ### Adicionado
-- **Autenticação de Usuários**
-  - Registro com email/senha
-  - Login seguro com Supabase Auth
-  - Recuperação de senha
-  - Row Level Security (RLS) para proteção de dados
-
-- **Gestão de Pets**
-  - CRUD completo de pets (criar, ler, atualizar, deletar)
-  - Cadastro de múltiplos pets por tutor
-  - Informações: nome, raça, data de nascimento, peso, observations
-  - Upload de foto do pet (planejado)
-
-- **Controle de Vacinação**
-  - Catálogo de vacinas disponíveis
-  - Registro de doses aplicadas
-  - Cálculo automático de próxima dose
-  - Histórico vacinal completo
-
-- **Dashboard de Monitoramento**
-  - Status visual de vacinação (Em dia, Pendente, Crítico)
-  - Cards de resumo por pet
-  - Indicadores de urgência coloridos
-  - Filtros por status
-
-- **Interface de Usuário**
-  - Design responsivo (mobile-first)
-  - Navegação intuitiva
-  - Componentes reutilizáveis
-  - Temas claro/escuro (planejado)
-
-- **Tecnologias**
-  - Next.js 15 com App Router
-  - React 19
-  - TypeScript para type-safety
-  - Tailwind CSS para estilização
-  - Supabase (PostgreSQL + Auth)
-  - React Hook Form + Zod para validação
+- **Documentação e Planejamento**
+  - Documento de requisitos funcionais (RF01-RF04)
+  - Modelo de dados definido (tabelas pets, vacinas, registros)
+  - Stack tecnológica definida (Next.js 15, React 19, TypeScript, Tailwind, Supabase)
+  - Design System especificado (componentes base, badges, cards)
+  - Custom Hooks planejados (useAuth, usePets, useVacinas, useRegistrosVacinais)
+  - Estrutura Vertical Slice Architecture definida
+  - Divisão de responsabilidades por membro da equipe
 
 ### Técnico
-- Estrutura de pastas organizada por domínio
-- Custom Hooks (`usePets`, `useVacinas`, `useAuth`)
-- Types TypeScript centralizados
-- Configuração de ESLint + Prettier
-- Scripts npm para desenvolvimento e build
+- Estrutura de pastas criada (src/app, src/core, src/features)
+- Arquivos types.ts criados (vazios, aguardando implementação)
+- Configuração do .gitignore
+- Repositório GitHub inicializado
 
 ---
 
-## Versões Anteriores
+## Planejado (próximas versões)
 
-### [0.3.0] - 2026-05-20
-- Primeira versão funcional com CRUD de pets
-- Autenticação básica implementada
-- Dashboard simplificado
+### [0.2.0] - Infraestrutura Base
+- Inicialização do projeto Next.js (package.json, configs)
+- Configuração do Supabase (Auth + Database)
+- Schema SQL final versionado (supabase/schema.sql)
+- Cliente Supabase configurado
+- Row Level Security (RLS) implementado
 
-### [0.2.0] - 2026-05-10
-- Módulo de vacinas implementado
-- Sistema de registro de doses
-- Cálculo de datas de revacinação
+### [0.3.0] - Autenticação e Design System
+- Autenticação de Usuários (registro, login, logout com Supabase Auth)
+- Recuperação de senha
+- Design System (paleta, tipografia, componentes base)
+- Páginas de Login e Cadastro
+- Componentes reutilizáveis (Button, Input, Card, Badge, StatusBadge)
 
-### [0.1.0] - 2026-04-15
-- Setup inicial do projeto
-- Configuração do Next.js + Supabase
-- Schema do banco de dados definido
+### [0.4.0] - CRUD e Vacinação
+- CRUD completo de pets (criar, ler, atualizar, deletar)
+- Catálogo de vacinas disponíveis
+- Registro de doses aplicadas
+- Cálculo automático de próxima dose
+- Hooks usePets e useRegistrosVacinais
+- Validação de formulários com React Hook Form + Zod
+
+### [1.0.0] - Dashboard e Deploy
+- Dashboard de Monitoramento com status visual (Em dia, Pendente, Crítico)
+- Cards de resumo por pet
+- Indicadores de urgência coloridos
+- Filtros por status
+- Deploy na Vercel
+- Interface responsiva (mobile-first)
 
 ---
 
@@ -119,7 +103,9 @@ Cada versão segue este padrão:
 - **X.Y.PATCH**: Correções de bugs (compatíveis)
 
 **Exemplos:**
-- `1.0.0` → Primeiro release estável
+- `0.1.0` → Primeiro setup do projeto e documentação
+- `0.2.0` → Infraestrutura base (Next.js + Supabase)
+- `1.0.0` → Primeiro release estável e completo
 - `1.1.0` → Nova funcionalidade adicionada
 - `1.1.1` → Bug fix do módulo de autenticação
 - `2.0.0` → Mudança breaking (ex: refatoração completa do schema)
@@ -134,12 +120,12 @@ Cada versão segue este padrão:
 
 ---
 
-**Mantenedor:** Micael Cardoso Reis  
-**Contato:** cardosomicaelreis245@gmail.com  
-**Instituição:** IFPI - Campus Piripiri  
-**Curso:** Análise e Desenvolvimento de Sistemas  
+**Mantenedor:** Micael Cardoso Reis
+**Contato:** cardosomicaelreis245@gmail.com
+**Instituição:** IFPI - Campus Piripiri
+**Curso:** Análise e Desenvolvimento de Sistemas
 **Disciplina:** Programação para Internet I
 
 ---
 
-*Última atualização:* 17 de Junho de 2026
+*Última atualização:* 18 de Junho de 2026

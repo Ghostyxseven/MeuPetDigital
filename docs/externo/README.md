@@ -28,4 +28,4 @@ Esta pasta contém documentação voltada para **contribuidores externos** e **u
 
 ---
 
-**Última atualização:** 17 de Junho de 2026
+**Última atualização:** 18 de Junho de 2026
