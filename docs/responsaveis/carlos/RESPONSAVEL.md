@@ -1,8 +1,7 @@
-# 👤 Responsabilidades - Carlos
+# 👤 Responsabilidades - Antonio Carlos
 
-**Role:** Full-Stack / Features de Pets e Vacinação  
-**Email:** [adicionar email]  
-**GitHub:** @[adicionar github]
+**Role:** Full-Stack / Features de Pets e Vacinação
+**GitHub:** @gomes738
 
 ---
 
@@ -45,12 +44,4 @@
 
 ---
 
-## 📞 Contato
-
-- **Discord:** [adicionar]
-- **Telegram:** [adicionar]
-- **Horário:** [definir]
-
----
-
-**Última atualização:** 17 de Junho de 2026
+**Última atualização:** 18 de Junho de 2026

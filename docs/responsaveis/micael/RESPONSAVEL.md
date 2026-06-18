@@ -1,7 +1,7 @@
 # 👤 Responsabilidades - Micael Cardoso Reis
 
-**Role:** Tech Lead / Full-Stack  
-**Email:** cardosomicaelreis245@gmail.com  
+**Role:** Tech Lead / Full-Stack
+**Email:** cardosomicaelreis245@gmail.com
 **GitHub:** @Ghostyxseven
 
 ---
@@ -10,20 +10,20 @@
 
 ### 🏗️ Arquitetura e Configuração Geral
 - [x] Arquitetura geral do sistema (App Router, estrutura de pastas)
-- [x] Configuração inicial do projeto Next.js
-- [x] Configuração do Supabase (Auth + Database)
 - [x] Modelagem de dados (tabelas pets, vacinas, registros)
-- [x] Políticas de Row Level Security (RLS)
+- [ ] Configuração inicial do projeto Next.js (package.json, configs)
+- [ ] Configuração do Supabase (Auth + Database)
+- [ ] Políticas de Row Level Security (RLS)
 - [ ] Schema SQL final versionado (`supabase/schema.sql`)
 
 ### 🔐 Autenticação (`useAuth`)
-- [x] Hook `useAuth` — login, registro, sessão e logout
-- [x] Proteção de rotas autenticadas
+- [ ] Hook `useAuth` — login, registro, sessão e logout
+- [ ] Proteção de rotas autenticadas
 - [ ] Recuperação de senha (fluxo completo)
 
 ### 📊 Dashboard Principal
-- [x] Página principal com indicadores de status vacinal
-- [x] Lógica de cálculo: "em dia", "próxima" e "atrasada"
+- [ ] Página principal com indicadores de status vacinal
+- [ ] Lógica de cálculo: "em dia", "próxima" e "atrasada"
 - [ ] Filtros por status no dashboard
 
 ---
@@ -40,6 +40,7 @@
 
 ## 🎯 Tasks do Trabalho (entrega)
 
+- [ ] Inicializar projeto Next.js com configs e dependências
 - [ ] Criar `supabase/schema.sql` com todas as tabelas e políticas RLS
 - [ ] Garantir que o sistema roda do zero com `npm install` + `.env.local`
 - [ ] Revisar e aprovar PRs dos outros membros antes da entrega
@@ -53,4 +54,4 @@
 
 ---
 
-**Última atualização:** 17 de Junho de 2026
+**Última atualização:** 18 de Junho de 2026

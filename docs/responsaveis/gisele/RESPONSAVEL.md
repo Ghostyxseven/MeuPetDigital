@@ -1,8 +1,7 @@
 # 👤 Responsabilidades - Gisele
 
-**Role:** Front-End / Design System  
-**Email:** [adicionar email]  
-**GitHub:** @[adicionar github]
+**Role:** Front-End / Design System
+**GitHub:** @Gisele002
 
 ---
 
@@ -45,12 +44,4 @@
 
 ---
 
-## 📞 Contato
-
-- **Discord:** [adicionar]
-- **Telegram:** [adicionar]
-- **Horário:** [definir]
-
----
-
-**Última atualização:** 17 de Junho de 2026
+**Última atualização:** 18 de Junho de 2026

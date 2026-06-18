@@ -1,8 +1,7 @@
 # 👤 Responsabilidades - Josiane
 
-**Role:** QA / Testes e Documentação Final  
-**Email:** [adicionar email]  
-**GitHub:** @[adicionar github]
+**Role:** QA / Testes e Documentação Final
+**GitHub:** @Josiane10
 
 ---
 
@@ -46,12 +45,4 @@
 
 ---
 
-## 📞 Contato
-
-- **Discord:** [adicionar]
-- **Telegram:** [adicionar]
-- **Horário:** [definir]
-
----
-
-**Última atualização:** 17 de Junho de 2026
+**Última atualização:** 18 de Junho de 2026
