@@ -8,14 +8,14 @@
 ## 📋 Responsabilidades Principais
 
 ### 🗄️ Banco de Dados e Supabase
-- [ ] Revisar e validar o schema SQL das tabelas (`pets`, `vacinas`, `registros`)
-- [ ] Popular o banco com dados de teste (seed) usando Supabase ou script
-- [ ] Testar as políticas de RLS — garantir que usuários só veem seus dados
-- [ ] Verificar integridade das relações (chaves estrangeiras, constraints)
+- [x] Revisar e validar o schema SQL das tabelas (`pets`, `vacinas`, `registros`)
+- [x] Popular o banco com dados de teste (seed) usando Supabase ou script
+- [x] Testar as políticas de RLS — garantir que usuários só veem seus dados
+- [x] Verificar integridade das relações (chaves estrangeiras, constraints)
 
 ### 🔌 Integração Front-End ↔ Supabase
-- [ ] Configurar o cliente Supabase (`src/lib/supabase/client.ts`)
-- [ ] Hook `useVacinas` — busca o catálogo de vacinas do banco
+- [x] Configurar o cliente Supabase (`src/lib/supabase/client.ts`)
+- [x] Hook `useVacinas` — busca o catálogo de vacinas do banco
 - [ ] Testar as queries de leitura/escrita do CRUD no banco real
 
 ### ☁️ Deploy e Ambiente
