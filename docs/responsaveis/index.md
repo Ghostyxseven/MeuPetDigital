@@ -1,74 +1,54 @@
-# 👥 Responsáveis pelo Projeto
+# Responsaveis pelo Projeto
 
-Esta pasta organiza as responsabilidades de cada membro da equipe MeuPetDigital.
-
----
-
-## 📋 Equipe e Funções
-
-| Membro | Função | Área Principal | GitHub |
-|--------|--------|----------------|--------|
-| [**Micael Cardoso Reis**](./micael/RESPONSAVEL.md) | Tech Lead / Full-Stack | Arquitetura, Auth, Dashboard | @Ghostyxseven |
-| [**Gisele**](./gisele/RESPONSAVEL.md) | Front-End / Design System | UI Components, Telas de Auth | @Gisele002 |
-| [**Marcos Vinícius**](./marcos/RESPONSAVEL.md) | Back-End / Banco de Dados | Supabase, RLS, Deploy | @MarcsVinny |
-| [**Antonio Carlos**](./carlos/RESPONSAVEL.md) | Full-Stack / Features | CRUD Pets, Vacinas, Zod | @gomes738 |
-| [**Josiane**](./josiane/RESPONSAVEL.md) | QA / Documentação Final | Testes Manuais, PDF entrega | @Josiane10 |
+Esta pasta organiza responsabilidades unicas por membro da equipe MeuPetDigital.
 
 ---
 
-## 🗂️ Divisão de Responsabilidades por Área
+## Equipe e Funcoes
 
-### 🔐 Autenticação e Segurança
-**Responsável:** Micael  
-Hook `useAuth`, login, registro, sessão, RLS no Supabase.
-
-### 🎨 Design System e Interface
-**Responsável:** Gisele  
-Paleta de cores, tipografia, componentes base (`Button`, `Input`, `Card`, `Badge`), telas de login e cadastro.
-
-### 🗄️ Banco de Dados e Deploy
-**Responsável:** Marcos Vinícius  
-Schema SQL, seed de dados, validação de RLS, configuração do Vercel.
-
-### 🐕 CRUD de Pets e Vacinação
-**Responsável:** Antonio Carlos  
-Páginas de pets (`/pets`, `/pets/novo`, `/pets/[id]`), registro de vacinas, hooks `usePets` e `useRegistrosVacinais`, validações Zod.
-
-### ✅ Testes e Entrega Final
-**Responsável:** Josiane  
-Testes manuais de todos os fluxos, reporte de bugs, PDF final e assinaturas.
+| Membro | Funcao | Responsabilidade unica | GitHub |
+|--------|--------|-------------------------|--------|
+| [Micael Cardoso Reis](./micael/RESPONSAVEL.md) | Tech Lead / Full-Stack | Arquitetura, autenticacao e dashboard | @Ghostyxseven |
+| [Gisele](./gisele/RESPONSAVEL.md) | Front-End / Design System | Design system e telas visuais de auth | @Gisele002 |
+| [Marcos Vinicius](./marcos/RESPONSAVEL.md) | Back-End / Banco de Dados | Supabase, RLS, seed e deploy | @MarcsVinny |
+| [Antonio Carlos](./carlos/RESPONSAVEL.md) | Full-Stack / Features | CRUD de pets, vacinas e validacoes Zod | @gomes738 |
+| [Josiane](./josiane/RESPONSAVEL.md) | QA / Documentacao Final | Testes manuais e PDF final | @Josiane10 |
 
 ---
 
-## 🎯 O que cada um entrega no trabalho
+## Divisao Unica por Area
 
-| Membro | Entregável principal |
+| Area | Responsavel principal | Apoio |
+|------|------------------------|-------|
+| Arquitetura da aplicacao | Micael | Marcos Vinicius |
+| Autenticacao e protecao de rotas | Micael | Gisele |
+| Dashboard principal | Micael | Antonio Carlos |
+| Design system | Gisele | Antonio Carlos |
+| Telas visuais de login/cadastro | Gisele | Micael |
+| Banco, RLS, seed e deploy | Marcos Vinicius | Micael |
+| CRUD de pets | Antonio Carlos | Micael |
+| Registro de vacinas | Antonio Carlos | Marcos Vinicius |
+| Testes manuais e entrega final | Josiane | Todos |
+
+---
+
+## O que cada um entrega
+
+| Membro | Entregavel principal |
 |--------|----------------------|
-| Micael | Sistema arquitetado, auth funcionando, dashboard com status |
-| Gisele | Design System aplicado + telas de login/cadastro |
-| Marcos Vinícius | Banco real no Supabase + deploy na Vercel |
-| Antonio Carlos | CRUD completo + 2 Custom Hooks + validação Zod |
-| Josiane | Testes manuais documentados + PDF final assinado |
+| Micael | Auth funcional, rotas protegidas e dashboard com status |
+| Gisele | Componentes visuais e telas de auth polidas |
+| Marcos Vinicius | Banco real no Supabase, RLS validada e deploy |
+| Antonio Carlos | CRUD completo de pets e registros vacinais |
+| Josiane | Testes manuais documentados e PDF final |
 
 ---
 
-## 📊 Matriz de Apoio (Backup)
+## Estrutura
 
-| Área | Responsável | Apoio |
-|------|-------------|-------|
-| Arquitetura | Micael | Marcos Vinícius |
-| Design System | Gisele | Antonio Carlos |
-| Banco de Dados | Marcos Vinícius | Micael |
-| CRUD / Hooks | Antonio Carlos | Micael |
-| QA / Entrega | Josiane | Todos |
-
----
-
-## 📁 Estrutura
-
-```
+```text
 responsaveis/
-├── index.md          # Este arquivo
+├── index.md
 ├── micael/
 │   └── RESPONSAVEL.md
 ├── gisele/
@@ -83,5 +63,5 @@ responsaveis/
 
 ---
 
-**Última atualização:** 18 de Junho de 2026  
+**Ultima atualizacao:** 22 de Junho de 2026  
 **Mantenedor:** Micael Cardoso Reis
