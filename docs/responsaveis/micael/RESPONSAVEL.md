@@ -1,57 +1,71 @@
-# 👤 Responsabilidades - Micael Cardoso Reis
+# Responsabilidades - Micael Cardoso Reis
 
-**Role:** Tech Lead / Full-Stack
-**Email:** cardosomicaelreis245@gmail.com
+**Role:** Tech Lead / Full-Stack  
+**Email:** cardosomicaelreis245@gmail.com  
 **GitHub:** @Ghostyxseven
 
 ---
 
-## 📋 Responsabilidades Principais
+## Responsabilidade Unica
 
-### 🏗️ Arquitetura e Configuração Geral
-- [x] Arquitetura geral do sistema (App Router, estrutura de pastas)
-- [x] Modelagem de dados (tabelas pets, vacinas, registros)
-- [ ] Configuração inicial do projeto Next.js (package.json, configs)
-- [ ] Configuração do Supabase (Auth + Database)
-- [ ] Políticas de Row Level Security (RLS)
-- [ ] Schema SQL final versionado (`supabase/schema.sql`)
+Micael e o responsavel por **arquitetura da aplicacao, fluxo de autenticacao e dashboard principal**.
 
-### 🔐 Autenticação (`useAuth`)
-- [ ] Hook `useAuth` — login, registro, sessão e logout
-- [ ] Proteção de rotas autenticadas
-- [ ] Recuperação de senha (fluxo completo)
-
-### 📊 Dashboard Principal
-- [ ] Página principal com indicadores de status vacinal
-- [ ] Lógica de cálculo: "em dia", "próxima" e "atrasada"
-- [ ] Filtros por status no dashboard
+Ele nao e o responsavel principal por CRUD de pets, banco/deploy ou documentacao final. Essas areas ficam com os demais membros definidos no indice geral.
 
 ---
 
-## 📁 Documentos Sob Responsabilidade
+## Entregas do Micael
+
+### Arquitetura da Aplicacao
+- [x] Definir estrutura geral com Next.js App Router.
+- [x] Organizar providers globais da aplicacao.
+- [x] Manter a separacao entre paginas, features e bibliotecas compartilhadas.
+
+### Autenticacao e Sessao
+- [x] Implementar hook `useAuth`.
+- [x] Implementar `AuthProvider` para sessao do Supabase Auth.
+- [x] Implementar `ProtectedRoute` para proteger rotas autenticadas.
+- [x] Criar pagina de login (`/login`).
+- [x] Criar pagina de cadastro (`/cadastro`).
+- [x] Criar fluxo de recuperacao de senha (`/recuperar-senha` e `/redefinir-senha`).
+
+### Dashboard Principal
+- [x] Implementar dashboard autenticado (`/dashboard`).
+- [x] Exibir indicadores de pets em dia, proximos e atrasados.
+- [x] Implementar filtros por status e por pet.
+- [x] Consumir dados reais do Supabase quando configurado.
+- [x] Manter dados de demonstracao separados da pagina em `src/features/dashboard/mockData.ts`.
+
+---
+
+## Fora do Escopo do Micael
+
+| Area | Responsavel principal |
+|------|------------------------|
+| Banco real, schema final, RLS e deploy | Marcos Vinicius |
+| CRUD de pets e registros vacinais | Antonio Carlos |
+| Design system e telas visuais de auth | Gisele |
+| Testes manuais e PDF final | Josiane |
+
+---
+
+## Documentos Sob Responsabilidade
 
 | Documento | Status |
 |-----------|--------|
-| [docs/interno/Documentação.md](../../interno/Documentação.md) | ✅ Completo |
-| [docs/tecnico/ESTRUTURA.md](../../tecnico/ESTRUTURA.md) | ✅ Completo |
-| [docs/externo/CHANGELOG.md](../../externo/CHANGELOG.md) | ✅ Completo |
+| [docs/tecnico/ESTRUTURA.md](../../tecnico/ESTRUTURA.md) | Completo |
+| [docs/interno/Documentacao.md](../../interno/Documentação.md) | Apoio tecnico |
 
 ---
 
-## 🎯 Tasks do Trabalho (entrega)
+## Status Final do Escopo
 
-- [ ] Inicializar projeto Next.js com configs e dependências
-- [ ] Criar `supabase/schema.sql` com todas as tabelas e políticas RLS
-- [ ] Garantir que o sistema roda do zero com `npm install` + `.env.local`
-- [ ] Revisar e aprovar PRs dos outros membros antes da entrega
-
----
-
-## 📞 Contato
-
-- **Telegram:** [@micaelreis](https://t.me/micaelreis)
-- **Horário:** Seg-Sex, 14h-22h
+- [x] Arquitetura base criada.
+- [x] Autenticacao implementada.
+- [x] Dashboard implementado.
+- [x] Mock removido da pagina e separado em modulo proprio.
+- [ ] Revisar integracao final quando Marcos concluir Supabase real e Antonio concluir CRUD.
 
 ---
 
-**Última atualização:** 18 de Junho de 2026
+**Ultima atualizacao:** 22 de Junho de 2026
