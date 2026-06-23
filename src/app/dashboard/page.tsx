@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import {
   AlertTriangle,
   Calendar,
@@ -14,6 +15,7 @@ import {
   Plus,
   Shield,
   User as UserIcon,
+  Syringe,
 } from 'lucide-react';
 import { getStatusUI, getVacinaStatus } from '@/core/lib/vacinaStatus';
 import { supabase } from '@/core/lib/supabase/client';
@@ -21,6 +23,7 @@ import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { MOCK_PETS, MOCK_REGISTROS } from '@/features/dashboard/mockData';
 import type { DashboardPet, DashboardRegistro } from '@/features/dashboard/types';
+
 
 export default function DashboardPage() {
   return (
@@ -217,14 +220,24 @@ function DashboardContent() {
             <h1 className="text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl">Dashboard de Saude</h1>
             <p className="mt-1 text-sm text-slate-500">Acompanhe a imunizacao e o status vacinal dos seus pets.</p>
           </div>
-          <button
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700"
-            type="button"
-            onClick={() => router.push('/pets/novo')}
-          >
-            <Plus className="h-4 w-4" />
-            Cadastrar Novo Pet
-          </button>
+          <div className="flex flex-wrap gap-3">
+            <button
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-700 shadow-sm transition hover:bg-slate-50"
+              type="button"
+              onClick={() => router.push('/vacinas/registrar')}
+            >
+              <Syringe className="h-4 w-4 text-emerald-600" />
+              Registrar Vacina
+            </button>
+            <button
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white shadow-lg shadow-emerald-600/20 transition hover:bg-emerald-700"
+              type="button"
+              onClick={() => router.push('/pets/novo')}
+            >
+              <Plus className="h-4 w-4" />
+              Cadastrar Novo Pet
+            </button>
+          </div>
         </div>
 
         <div className="mb-8 grid grid-cols-2 gap-4 lg:grid-cols-4">
@@ -274,7 +287,12 @@ function DashboardContent() {
 
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           <section>
-            <h2 className="mb-4 text-lg font-bold text-slate-900">Seus Pets</h2>
+            <div className="mb-4 flex items-center justify-between">
+              <h2 className="text-lg font-bold text-slate-900">Seus Pets</h2>
+              <Link href="/pets" className="text-xs font-bold text-emerald-700 hover:text-emerald-800 transition">
+                Ver todos
+              </Link>
+            </div>
             {filteredPets.length === 0 ? (
               <EmptyState icon={<Dog className="h-8 w-8" />} title="Nenhum pet encontrado" />
             ) : (

@@ -15,3 +15,16 @@ export interface RegistroVacinal {
   observacoes: string | null;
   created_at: string;
 }
+
+export interface RegistroVacinalDetailed extends RegistroVacinal {
+  pets?: {
+    id: string;
+    nome: string;
+  } | null;
+  vacinas?: {
+    id: string;
+    nome: string;
+    intervalo_dias: number;
+  } | null;
+}
+
