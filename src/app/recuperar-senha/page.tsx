@@ -7,6 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { KeyRound, Mail } from 'lucide-react';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { emailSchema, type EmailFormData } from '@/features/auth/schemas';
+import { Button, Input } from '@/core/components';
 
 export default function RecuperarSenhaPage() {
   const { resetPassword, loading } = useAuth();
@@ -31,7 +32,7 @@ export default function RecuperarSenhaPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
-      <section className="w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <section className="animate-slide-up w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-600 text-white">
             <KeyRound className="h-6 w-6" />
@@ -43,31 +44,36 @@ export default function RecuperarSenhaPage() {
         </div>
 
         <form className="space-y-4" onSubmit={handleSubmit(onSubmit)}>
-          <label className="block">
-            <span className="text-sm font-semibold text-slate-700">Email</span>
-            <input
-              className="mt-1 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm outline-none transition focus:border-emerald-500"
-              type="email"
-              autoComplete="email"
-              {...register('email')}
-            />
-            {errors.email && <span className="mt-1 block text-xs font-medium text-red-600">{errors.email.message}</span>}
-          </label>
+          <Input
+            label="Email"
+            type="email"
+            autoComplete="email"
+            registration={register('email')}
+            error={errors.email?.message}
+          />
 
-          {formError && <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-medium text-red-700">{formError}</p>}
-          {message && <p className="rounded-xl bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700">{message}</p>}
+          {formError && (
+            <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+              {formError}
+            </p>
+          )}
+          {message && (
+            <p className="rounded-xl bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700">
+              {message}
+            </p>
+          )}
 
-          <button
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white transition hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-60"
+          <Button
             type="submit"
-            disabled={loading}
+            loading={loading}
+            icon={<Mail className="h-4 w-4" />}
+            className="w-full"
           >
-            <Mail className="h-4 w-4" />
             {loading ? 'Enviando...' : 'Enviar link'}
-          </button>
+          </Button>
         </form>
 
-        <Link className="mt-5 block text-center text-sm font-semibold text-slate-700 hover:text-slate-950" href="/login">
+        <Link className="mt-5 block text-center text-sm font-semibold text-slate-700 hover:text-slate-950 transition-colors" href="/login">
           Voltar para login
         </Link>
       </section>
