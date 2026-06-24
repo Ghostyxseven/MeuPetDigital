@@ -159,25 +159,50 @@ O projeto adota uma identidade visual própria para garantir consistência em to
 
 ---
 
-## 7. Custom Hooks
+## 7. Custom Hooks e Validações Zod
 
-O trabalho prevê pelo menos dois hooks personalizados, com isolamento da regra de negócio.
+O trabalho implementa a separação de responsabilidades isolando as regras de negócio em Custom Hooks e as regras de integridade dos dados em schemas Zod.
 
-### `useAuth`
+### Validações de Formulários (Zod Schemas)
 
-Responsável por autenticação, sessão e proteção de rotas.
+#### Schema de Pets (`petSchema`)
+Localizado em `src/features/pets/schemas.ts`, valida os dados cadastrais do animal:
+- `nome`: Obrigatório (string não vazia).
+- `raca`: Opcional (string ou nulo).
+- `data_nascimento`: Opcional, com validação personalizada impedindo datas futuras.
+- `peso`: Opcional, pré-processado para converter strings vazias em nulo e garantir que seja um valor numérico não negativo.
+- `rg_sinpatinhas`: Opcional (registro nacional do animal).
 
-### `usePets`
+#### Schema de Registros Vacinais (`registroVacinalSchema`)
+Localizado em `src/features/vacinas/schemas.ts`, valida o registro de imunização aplicado:
+- `pet_id`: Obrigatório (UUID do pet selecionado).
+- `vacina_id`: Obrigatório (UUID do catálogo de vacinas).
+- `data_aplicacao`: Obrigatório, com validação impedindo datas futuras.
+- `observacoes`: Opcional (clínica, lote da vacina, etc.).
 
-Responsável por CRUD, listagem e filtros de pets.
+---
 
-### `useVacinas`
+### Custom Hooks Implementados
 
-Responsável por catálogo de vacinas e registros.
+#### `useAuth`
+Responsável por autenticação, sessão e proteção de rotas, integrando com o Supabase Auth.
 
-### `useRegistrosVacinais`
+#### `usePets`
+Centraliza o CRUD completo de pets conectado ao Supabase:
+- `pets`: Lista de pets cadastrados pelo usuário.
+- `getPetById(id)`: Busca os detalhes de um cão específico.
+- `createPet(input)`: Insere um novo pet associando ao `user_id` autenticado.
+- `updatePet(id, input)`: Atualiza dados cadastrais.
+- `deletePet(id)`: Exclui o pet de forma definitiva.
 
-Responsável por consolidar histórico, status e próximas doses.
+#### `useVacinas`
+Responsável por carregar o catálogo público de vacinas disponíveis (`vacinas`).
+
+#### `useRegistrosVacinais`
+Responsável pelo histórico de imunização e cálculo inteligente de próximas doses:
+- `registros`: Histórico vacinal carregado (com relações de nome do pet e nome da vacina).
+- `createRegistro(input)`: Insere a aplicação de vacina. Realiza o cálculo automático da `proxima_dose` no momento da inserção: busca o `intervalo_dias` da vacina selecionada e soma à `data_aplicacao` informada para computar a data de reforço recomendada.
+
 
 ---
 

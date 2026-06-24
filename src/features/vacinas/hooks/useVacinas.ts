@@ -21,8 +21,9 @@ export function useVacinas() {
         }
 
         setVacinas(data as Vacina[]);
-      } catch (err: any) {
-        setError(err.message || 'Erro ao carregar vacinas');
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : 'Erro ao carregar vacinas';
+        setError(msg);
       } finally {
         setIsLoading(false);
       }
