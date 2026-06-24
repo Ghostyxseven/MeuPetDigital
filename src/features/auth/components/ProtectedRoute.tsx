@@ -3,6 +3,7 @@
 import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '../hooks/useAuth';
+import { Spinner } from '@/core/components';
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -19,14 +20,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
   }, [user, loading, router]);
 
   if (loading) {
-    return (
-      <div className="flex h-screen w-screen items-center justify-center bg-gray-50">
-        <div className="flex flex-col items-center gap-2">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-emerald-500 border-t-transparent"></div>
-          <p className="text-sm font-medium text-gray-500">Carregando sessão...</p>
-        </div>
-      </div>
-    );
+    return <Spinner size="md" label="Carregando sessão..." fullscreen />;
   }
 
   if (!user) {
