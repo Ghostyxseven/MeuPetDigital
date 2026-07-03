@@ -1,14 +1,14 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { User, Session } from '@supabase/supabase-js';
-import { supabase } from '@/core/lib/supabase/client';
+import { User, Session } from '../types';
 
 interface AuthContextType {
   user: User | null;
   session: Session | null;
   loading: boolean;
   signOut: () => Promise<void>;
+  checkSession: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -18,37 +18,49 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Função para carregar a sessão atual da nossa API local
+  const checkSession = async () => {
+    try {
+      const res = await fetch('/api/auth/session');
+      const json = await res.json();
+      
+      if (json.data && json.data.session) {
+        setSession(json.data.session);
+        setUser(json.data.session.user);
+      } else {
+        setSession(null);
+        setUser(null);
+      }
+    } catch (err) {
+      console.error('Erro ao verificar sessão:', err);
+      setSession(null);
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    // Obter sessão atual
-    supabase.auth.getSession().then(({ data: { session: activeSession } }) => {
-      setSession(activeSession);
-      setUser(activeSession?.user ?? null);
-      setLoading(false);
-    });
-
-    // Escutar mudanças no estado de autenticação (login, logout, token refrescado)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, activeSession) => {
-      setSession(activeSession);
-      setUser(activeSession?.user ?? null);
-      setLoading(false);
-    });
-
-    return () => {
-      subscription.unsubscribe();
-    };
+    checkSession();
   }, []);
 
   const signOut = async () => {
     setLoading(true);
     try {
-      await supabase.auth.signOut();
+      const res = await fetch('/api/auth/signout', { method: 'POST' });
+      if (res.ok) {
+        setSession(null);
+        setUser(null);
+      }
+    } catch (err) {
+      console.error('Erro ao fazer logout:', err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signOut }}>
+    <AuthContext.Provider value={{ user, session, loading, signOut, checkSession }}>
       {children}
     </AuthContext.Provider>
   );

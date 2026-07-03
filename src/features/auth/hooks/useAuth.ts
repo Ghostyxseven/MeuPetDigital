@@ -1,25 +1,27 @@
 'use client';
 
 import { useState } from 'react';
-import { supabase } from '@/core/lib/supabase/client';
 import { useAuthContext } from '../components/AuthProvider';
 
 export function useAuth() {
-  const { user, session, loading: contextLoading, signOut } = useAuthContext();
+  const { user, session, loading: contextLoading, signOut, checkSession } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Cadastro de usuário
-  const signUp = async (email: string, password: string, options?: { data?: Record<string, unknown> }) => {
+  const signUp = async (email: string, password: string) => {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: signUpError } = await supabase.auth.signUp({
-        email,
-        password,
-        options,
+      const res = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
-      if (signUpError) throw signUpError;
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao cadastrar usuário.');
+      
+      await checkSession();
       return data;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Erro ao cadastrar usuário.';
@@ -35,11 +37,15 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: signInError } = await supabase.auth.signInWithPassword({
-        email,
-        password,
+      const res = await fetch('/api/auth/signin', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
-      if (signInError) throw signInError;
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao realizar login.');
+
+      await checkSession();
       return data;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Erro ao realizar login.';
@@ -50,16 +56,13 @@ export function useAuth() {
     }
   };
 
-  // Recuperação de senha - Enviar email
+  // Recuperação de senha - Simulado localmente
   const resetPassword = async (email: string, redirectTo: string) => {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo,
-      });
-      if (resetError) throw resetError;
-      return data;
+      // Simula o sucesso imediato localmente
+      return { success: true };
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Erro ao enviar email de recuperação.';
       setError(errorMsg);
@@ -69,15 +72,20 @@ export function useAuth() {
     }
   };
 
-  // Atualizar senha (usado após clicar no link do email de recuperação)
+  // Atualizar senha no banco de dados local
   const updatePassword = async (password: string) => {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: updateError } = await supabase.auth.updateUser({
-        password,
+      const res = await fetch('/api/auth/update-password', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
       });
-      if (updateError) throw updateError;
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erro ao atualizar a senha.');
+      
+      await checkSession();
       return data;
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Erro ao atualizar a senha.';

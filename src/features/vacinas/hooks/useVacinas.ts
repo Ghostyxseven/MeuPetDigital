@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { supabase } from '@/core/lib/supabase/client';
 import { Vacina } from '../types';
 
 export function useVacinas() {
@@ -11,13 +10,11 @@ export function useVacinas() {
     async function fetchVacinas() {
       try {
         setIsLoading(true);
-        const { data, error: supabaseError } = await supabase
-          .from('vacinas')
-          .select('*')
-          .order('nome', { ascending: true });
+        const res = await fetch('/api/vacinas');
+        const data = await res.json();
 
-        if (supabaseError) {
-          throw supabaseError;
+        if (!res.ok) {
+          throw new Error(data.error || 'Erro ao carregar catálogo de vacinas.');
         }
 
         setVacinas(data as Vacina[]);
