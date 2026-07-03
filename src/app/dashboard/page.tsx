@@ -15,7 +15,6 @@ import {
   Syringe,
 } from 'lucide-react';
 import { getStatusUI, getVacinaStatus } from '@/core/lib/vacinaStatus';
-import { supabase } from '@/core/lib/supabase/client';
 import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { MOCK_PETS, MOCK_REGISTROS } from '@/features/dashboard/mockData';
@@ -51,63 +50,29 @@ function DashboardContent() {
 
   useEffect(() => {
     async function fetchDashboardData() {
-      const isConfigured =
-        process.env.NEXT_PUBLIC_SUPABASE_URL &&
-        process.env.NEXT_PUBLIC_SUPABASE_URL !== 'https://seu-projeto.supabase.co';
-
-      if (!isConfigured) {
-        setPets(MOCK_PETS);
-        setRegistros(MOCK_REGISTROS);
-        setUseMockData(true);
-        setLoading(false);
-        return;
-      }
-
       try {
         setLoading(true);
 
-        const { data: dbPets, error: petsError } = await supabase
-          .from('pets')
-          .select('*')
-          .order('nome', { ascending: true });
+        const petsRes = await fetch('/api/pets');
+        if (!petsRes.ok) throw new Error('Falha ao carregar pets.');
+        const dbPets = await petsRes.json();
 
-        if (petsError) throw petsError;
+        const registrosRes = await fetch('/api/registros');
+        if (!registrosRes.ok) throw new Error('Falha ao carregar registros.');
+        const dbRegistros = await registrosRes.json();
 
-        const { data: dbRegistros, error: registrosError } = await supabase
-          .from('registros')
-          .select('id, data_aplicacao, proxima_dose, pets (id, nome), vacinas (nome)');
-
-        if (registrosError) throw registrosError;
-
-        const mappedRegistros: DashboardRegistro[] = (dbRegistros || []).map((item) => {
-          const registro = item as unknown as {
-            id: string;
-            data_aplicacao: string;
-            proxima_dose: string | null;
-            pets: { id: string; nome: string } | null;
-            vacinas: { nome: string } | null;
-          };
-
+        const mappedRegistros: DashboardRegistro[] = (dbRegistros || []).map((item: any) => {
           return {
-            id: registro.id,
-            pet_nome: registro.pets?.nome || 'Pet removido',
-            vacina_nome: registro.vacinas?.nome || 'Vacina geral',
-            data_aplicacao: registro.data_aplicacao,
-            proxima_dose: registro.proxima_dose,
-            status: getVacinaStatus(registro.proxima_dose),
+            id: item.id,
+            pet_nome: item.pets?.nome || 'Pet removido',
+            vacina_nome: item.vacinas?.nome || 'Vacina geral',
+            data_aplicacao: item.data_aplicacao,
+            proxima_dose: item.proxima_dose,
+            status: getVacinaStatus(item.proxima_dose),
           };
         });
 
-        const mappedPets: DashboardPet[] = (dbPets || []).map((item) => {
-          const pet = item as unknown as {
-            id: string;
-            nome: string;
-            raca: string | null;
-            data_nascimento: string | null;
-            peso: number | null;
-            foto_url: string | null;
-            rg_sinpatinhas: string | null;
-          };
+        const mappedPets: DashboardPet[] = (dbPets || []).map((pet: any) => {
           const petRegistros = mappedRegistros.filter((registro) => registro.pet_nome === pet.nome);
           const statusVacinal = petRegistros.some((registro) => registro.status === 'atrasada')
             ? 'atrasada'
@@ -131,7 +96,7 @@ function DashboardContent() {
         setRegistros(mappedRegistros);
         setUseMockData(false);
       } catch (error) {
-        console.error('Erro ao buscar dados do Supabase:', error);
+        console.error('Erro ao buscar dados locais, usando simulados:', error);
         setPets(MOCK_PETS);
         setRegistros(MOCK_REGISTROS);
         setUseMockData(true);

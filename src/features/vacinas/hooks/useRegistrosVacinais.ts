@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { supabase } from '@/core/lib/supabase/client';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import type { RegistroVacinalDetailed } from '../types';
 
@@ -20,19 +19,13 @@ export function useRegistrosVacinais(petId?: string) {
       setIsLoading(true);
       setError(null);
 
-      let query = supabase
-        .from('registros')
-        .select('*, pets (id, nome), vacinas (id, nome, intervalo_dias)');
+      const url = petId ? `/api/registros?pet_id=${petId}` : '/api/registros';
+      const res = await fetch(url);
+      const data = await res.json();
 
-      if (petId) {
-        query = query.eq('pet_id', petId);
-      }
+      if (!res.ok) throw new Error(data.error || 'Erro ao buscar registros vacinais.');
 
-      const { data, error: supabaseError } = await query.order('data_aplicacao', { ascending: false });
-
-      if (supabaseError) throw supabaseError;
-
-      setRegistros((data as unknown as RegistroVacinalDetailed[]) || []);
+      setRegistros((data as RegistroVacinalDetailed[]) || []);
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Erro ao buscar registros vacinais.';
       setError(msg);
@@ -52,40 +45,15 @@ export function useRegistrosVacinais(petId?: string) {
       setIsLoading(true);
       setError(null);
 
-      // Fetch vacina interval to calculate next dose
-      const { data: vacinaData, error: vacinaError } = await supabase
-        .from('vacinas')
-        .select('intervalo_dias')
-        .eq('id', input.vacina_id)
-        .single();
+      const res = await fetch('/api/registros', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(input),
+      });
+      const data = await res.json();
 
-      if (vacinaError) throw vacinaError;
-
-      let proxima_dose = null;
-      if (vacinaData && vacinaData.intervalo_dias) {
-        const [year, month, day] = input.data_aplicacao.split('-').map(Number);
-        const dateObj = new Date(year, month - 1, day);
-        dateObj.setDate(dateObj.getDate() + vacinaData.intervalo_dias);
-        
-        const nextYear = dateObj.getFullYear();
-        const nextMonth = String(dateObj.getMonth() + 1).padStart(2, '0');
-        const nextDay = String(dateObj.getDate()).padStart(2, '0');
-        proxima_dose = `${nextYear}-${nextMonth}-${nextDay}`;
-      }
-
-      const { data, error: insertError } = await supabase
-        .from('registros')
-        .insert({
-          pet_id: input.pet_id,
-          vacina_id: input.vacina_id,
-          data_aplicacao: input.data_aplicacao,
-          proxima_dose,
-          observacoes: input.observacoes || null,
-        })
-        .select()
-        .single();
-
-      if (insertError) throw insertError;
+      if (!res.ok) throw new Error(data.error || 'Erro ao registrar vacina.');
+      
       await fetchRegistros();
       return data;
     } catch (err) {
