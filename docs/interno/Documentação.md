@@ -286,10 +286,10 @@ A apresentação oral deve ter de 7 a 8 slides com demonstração ao vivo do sis
 - Documentação acadêmica completa
 - Estrutura de pastas definida (Vertical Slice Architecture)
 - Divisão de responsabilidades por membro da equipe
+- Inicialização do projeto Next.js (package.json, configs)
 
 ### Pendente (depende da implementação)
 
-- Inicialização do projeto Next.js (package.json, configs)
 - Sistema rodando ao vivo
 - CRUD real integrado ao Supabase
 - Schema SQL final versionado (supabase/schema.sql)
