@@ -26,7 +26,7 @@ export default function CadastroPage() {
       await signUp(data.email, data.password);
       router.push('/dashboard');
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : 'Nao foi possivel criar a conta.');
+      setFormError(err instanceof Error ? err.message : 'Não foi possível criar a conta.');
     }
   };
 
@@ -76,7 +76,7 @@ export default function CadastroPage() {
         </form>
 
         <p className="mt-5 text-center text-sm text-slate-500">
-          Ja tem conta?{' '}
+          Já tem conta?{' '}
           <Link className="font-semibold text-emerald-700 hover:text-emerald-800 transition-colors" href="/login">
             Entrar
           </Link>
