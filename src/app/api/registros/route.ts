@@ -3,21 +3,33 @@ import crypto from 'crypto';
 import db from '@/core/lib/db/sqlite';
 import { getSessionUser } from '@/core/lib/db/auth-helper';
 
-// GET /api/registros - Listar históricos de vacinação
+interface RegistroRow {
+  id: string;
+  pet_id: string;
+  vacina_id: string;
+  data_aplicacao: string;
+  proxima_dose: string | null;
+  observacoes: string | null;
+  created_at: string;
+  pet_nome: string;
+  vacina_nome: string;
+  vacina_intervalo_dias: number;
+}
+
 export async function GET(req: NextRequest) {
   try {
     const user = await getSessionUser();
     if (!user) {
-      return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 });
+      return NextResponse.json({ error: 'Nao autorizado.' }, { status: 401 });
     }
 
     const { searchParams } = new URL(req.url);
     const petId = searchParams.get('pet_id');
 
-    let rows;
+    let rows: RegistroRow[];
     if (petId) {
       rows = db.prepare(`
-        SELECT 
+        SELECT
           r.*,
           p.nome AS pet_nome,
           v.nome AS vacina_nome,
@@ -27,10 +39,10 @@ export async function GET(req: NextRequest) {
         JOIN vacinas v ON r.vacina_id = v.id
         WHERE p.user_id = ? AND r.pet_id = ?
         ORDER BY r.data_aplicacao DESC
-      `).all(user.id, petId);
+      `).all(user.id, petId) as RegistroRow[];
     } else {
       rows = db.prepare(`
-        SELECT 
+        SELECT
           r.*,
           p.nome AS pet_nome,
           v.nome AS vacina_nome,
@@ -40,11 +52,10 @@ export async function GET(req: NextRequest) {
         JOIN vacinas v ON r.vacina_id = v.id
         WHERE p.user_id = ?
         ORDER BY r.data_aplicacao DESC
-      `).all(user.id);
+      `).all(user.id) as RegistroRow[];
     }
 
-    // Mapeia para a estrutura aninhada esperada pelo frontend
-    const mapped = rows.map((row: any) => ({
+    const mapped = rows.map((row) => ({
       id: row.id,
       pet_id: row.pet_id,
       vacina_id: row.vacina_id,
@@ -73,12 +84,11 @@ export async function GET(req: NextRequest) {
   }
 }
 
-// POST /api/registros - Criar registro vacinal com cálculo automático da próxima dose
 export async function POST(req: NextRequest) {
   try {
     const user = await getSessionUser();
     if (!user) {
-      return NextResponse.json({ error: 'Não autorizado.' }, { status: 401 });
+      return NextResponse.json({ error: 'Nao autorizado.' }, { status: 401 });
     }
 
     const body = await req.json();
@@ -86,42 +96,39 @@ export async function POST(req: NextRequest) {
 
     if (!pet_id || !vacina_id || !data_aplicacao) {
       return NextResponse.json(
-        { error: 'Pet, vacina e data de aplicação são obrigatórios.' },
+        { error: 'Pet, vacina e data de aplicacao sao obrigatorios.' },
         { status: 400 }
       );
     }
 
-    // Verifica se o pet pertence ao usuário logado
     const pet = db
       .prepare('SELECT id FROM pets WHERE id = ? AND user_id = ?')
       .get(pet_id, user.id);
 
     if (!pet) {
       return NextResponse.json(
-        { error: 'Pet não encontrado ou não pertence a este usuário.' },
+        { error: 'Pet nao encontrado ou nao pertence a este usuario.' },
         { status: 404 }
       );
     }
 
-    // Busca intervalo da vacina para calcular próxima dose
     const vacina = db
       .prepare('SELECT intervalo_dias FROM vacinas WHERE id = ?')
       .get(vacina_id) as { intervalo_dias: number } | undefined;
 
     if (!vacina) {
       return NextResponse.json(
-        { error: 'Vacina não encontrada.' },
+        { error: 'Vacina nao encontrada.' },
         { status: 404 }
       );
     }
 
-    // Calcula próxima dose se aplicável
     let proxima_dose = null;
     if (vacina.intervalo_dias) {
       const [year, month, day] = data_aplicacao.split('-').map(Number);
       const dateObj = new Date(year, month - 1, day);
       dateObj.setDate(dateObj.getDate() + vacina.intervalo_dias);
-      
+
       const nextYear = dateObj.getFullYear();
       const nextMonth = String(dateObj.getMonth() + 1).padStart(2, '0');
       const nextDay = String(dateObj.getDate()).padStart(2, '0');

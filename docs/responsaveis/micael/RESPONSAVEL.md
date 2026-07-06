@@ -23,17 +23,18 @@ Ele nao e o responsavel principal por CRUD de pets, banco/deploy ou documentacao
 
 ### Autenticacao e Sessao
 - [x] Implementar hook `useAuth`.
-- [x] Implementar `AuthProvider` para sessao do Supabase Auth.
+- [x] Implementar `AuthProvider` para sessao local da aplicacao.
 - [x] Implementar `ProtectedRoute` para proteger rotas autenticadas.
 - [x] Criar pagina de login (`/login`).
 - [x] Criar pagina de cadastro (`/cadastro`).
 - [x] Criar fluxo de recuperacao de senha (`/recuperar-senha` e `/redefinir-senha`).
+- [ ] Fortalecer a sessao local antes de tratar como producao.
 
 ### Dashboard Principal
 - [x] Implementar dashboard autenticado (`/dashboard`).
 - [x] Exibir indicadores de pets em dia, proximos e atrasados.
 - [x] Implementar filtros por status e por pet.
-- [x] Consumir dados reais do Supabase quando configurado.
+- [x] Consumir dados reais das APIs locais do projeto.
 - [x] Manter dados de demonstracao separados da pagina em `src/features/dashboard/mockData.ts`.
 
 ---
@@ -64,8 +65,10 @@ Ele nao e o responsavel principal por CRUD de pets, banco/deploy ou documentacao
 - [x] Autenticacao implementada.
 - [x] Dashboard implementado.
 - [x] Mock removido da pagina e separado em modulo proprio.
-- [ ] Revisar integracao final quando Marcos concluir Supabase real e Antonio concluir CRUD.
+- [x] Lint e build validados em 06 de julho de 2026.
+- [ ] Decidir junto com a equipe se a entrega final sera SQLite local ou Supabase real.
+- [ ] Revisar integracao final quando Marcos concluir a decisao de banco/deploy e Antonio validar o CRUD completo.
 
 ---
 
-**Ultima atualizacao:** 22 de Junho de 2026
+**Ultima atualizacao:** 06 de Julho de 2026

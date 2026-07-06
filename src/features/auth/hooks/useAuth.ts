@@ -61,6 +61,8 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
+      void email;
+      void redirectTo;
       // Simula o sucesso imediato localmente
       return { success: true };
     } catch (err) {

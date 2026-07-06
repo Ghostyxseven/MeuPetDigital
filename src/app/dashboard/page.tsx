@@ -14,11 +14,13 @@ import {
   Plus,
   Syringe,
 } from 'lucide-react';
-import { getStatusUI, getVacinaStatus } from '@/core/lib/vacinaStatus';
+import { getVacinaStatus } from '@/core/lib/vacinaStatus';
 import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { MOCK_PETS, MOCK_REGISTROS } from '@/features/dashboard/mockData';
 import type { DashboardPet, DashboardRegistro } from '@/features/dashboard/types';
+import type { Pet } from '@/features/pets/types';
+import type { RegistroVacinalDetailed } from '@/features/vacinas/types';
 import {
   Header,
   Button,
@@ -55,13 +57,13 @@ function DashboardContent() {
 
         const petsRes = await fetch('/api/pets');
         if (!petsRes.ok) throw new Error('Falha ao carregar pets.');
-        const dbPets = await petsRes.json();
+        const dbPets = (await petsRes.json()) as Pet[];
 
         const registrosRes = await fetch('/api/registros');
         if (!registrosRes.ok) throw new Error('Falha ao carregar registros.');
-        const dbRegistros = await registrosRes.json();
+        const dbRegistros = (await registrosRes.json()) as RegistroVacinalDetailed[];
 
-        const mappedRegistros: DashboardRegistro[] = (dbRegistros || []).map((item: any) => {
+        const mappedRegistros: DashboardRegistro[] = (dbRegistros || []).map((item) => {
           return {
             id: item.id,
             pet_nome: item.pets?.nome || 'Pet removido',
@@ -72,7 +74,7 @@ function DashboardContent() {
           };
         });
 
-        const mappedPets: DashboardPet[] = (dbPets || []).map((pet: any) => {
+        const mappedPets: DashboardPet[] = (dbPets || []).map((pet) => {
           const petRegistros = mappedRegistros.filter((registro) => registro.pet_nome === pet.nome);
           const statusVacinal = petRegistros.some((registro) => registro.status === 'atrasada')
             ? 'atrasada'
