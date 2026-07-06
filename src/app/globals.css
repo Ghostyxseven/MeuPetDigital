@@ -89,16 +89,6 @@
   --transition-smooth: 300ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-    --surface: #1a1a2e;
-    --surface-hover: #16213e;
-    --surface-border: #334155;
-  }
-}
-
 /* ── Tailwind Theme Extension ─────────────────────────────── */
 @theme inline {
   --color-background: var(--background);
@@ -166,7 +156,7 @@ body {
 }
 
 /* ── Focus Visible (acessibilidade) ────────────────────────── */
-:focus-visible {
+:focus-visible:not(input):not(select):not(textarea) {
   outline: 2px solid var(--primary-500);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
