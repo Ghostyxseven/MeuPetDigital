@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/features/auth/hooks/useAuth';
+import { supabase } from '@/core/lib/supabase/client';
 import type { RegistroVacinalDetailed } from '../types';
 
 export function useRegistrosVacinais(petId?: string) {
@@ -19,11 +20,22 @@ export function useRegistrosVacinais(petId?: string) {
       setIsLoading(true);
       setError(null);
 
-      const url = petId ? `/api/registros?pet_id=${petId}` : '/api/registros';
-      const res = await fetch(url);
-      const data = await res.json();
+      let query = supabase
+        .from('registros')
+        .select(`
+          *,
+          vacinas ( id, nome, intervalo_dias ),
+          pets ( id, nome )
+        `)
+        .order('data_aplicacao', { ascending: false });
 
-      if (!res.ok) throw new Error(data.error || 'Erro ao buscar registros vacinais.');
+      if (petId) {
+        query = query.eq('pet_id', petId);
+      }
+
+      const { data, error: supaError } = await query;
+
+      if (supaError) throw supaError;
 
       setRegistros((data as RegistroVacinalDetailed[]) || []);
     } catch (err) {
@@ -38,6 +50,7 @@ export function useRegistrosVacinais(petId?: string) {
     pet_id: string;
     vacina_id: string;
     data_aplicacao: string;
+    proxima_dose?: string | null;
     observacoes?: string | null;
   }) => {
     if (!user) throw new Error('Usuário não autenticado.');
@@ -45,14 +58,13 @@ export function useRegistrosVacinais(petId?: string) {
       setIsLoading(true);
       setError(null);
 
-      const res = await fetch('/api/registros', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(input),
-      });
-      const data = await res.json();
+      const { data, error: supaError } = await supabase
+        .from('registros')
+        .insert(input)
+        .select()
+        .single();
 
-      if (!res.ok) throw new Error(data.error || 'Erro ao registrar vacina.');
+      if (supaError) throw supaError;
       
       await fetchRegistros();
       return data;

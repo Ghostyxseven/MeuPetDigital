@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/features/auth/hooks/useAuth';
+import { supabase } from '@/core/lib/supabase/client';
 import type { Pet, CreatePetInput, UpdatePetInput } from '../types';
 
 export function usePets() {
@@ -18,11 +19,15 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      const res = await fetch('/api/pets');
-      const data = await res.json();
       
-      if (!res.ok) throw new Error(data.error || 'Erro ao carregar os pets.');
-      setPets(data || []);
+      const { data, error: supaError } = await supabase
+        .from('pets')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (supaError) throw supaError;
+      
+      setPets((data as Pet[]) || []);
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Erro ao carregar os pets.';
       setError(msg);
@@ -35,10 +40,14 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      const res = await fetch(`/api/pets/${id}`);
-      const data = await res.json();
+      
+      const { data, error: supaError } = await supabase
+        .from('pets')
+        .select('*')
+        .eq('id', id)
+        .single();
 
-      if (!res.ok) throw new Error(data.error || 'Erro ao buscar detalhes do pet.');
+      if (supaError) throw supaError;
       return data as Pet;
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Erro ao buscar detalhes do pet.';
@@ -54,14 +63,20 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      const res = await fetch('/api/pets', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(input),
-      });
-      const data = await res.json();
+      
+      const newPet = {
+        ...input,
+        user_id: user.id
+      };
 
-      if (!res.ok) throw new Error(data.error || 'Erro ao cadastrar o pet.');
+      const { data, error: supaError } = await supabase
+        .from('pets')
+        .insert(newPet)
+        .select()
+        .single();
+
+      if (supaError) throw supaError;
+      
       await fetchPets();
       return data as Pet;
     } catch (err) {
@@ -77,14 +92,16 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      const res = await fetch(`/api/pets/${id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(input),
-      });
-      const data = await res.json();
+      
+      const { data, error: supaError } = await supabase
+        .from('pets')
+        .update(input)
+        .eq('id', id)
+        .select()
+        .single();
 
-      if (!res.ok) throw new Error(data.error || 'Erro ao atualizar o pet.');
+      if (supaError) throw supaError;
+      
       await fetchPets();
       return data as Pet;
     } catch (err) {
@@ -100,12 +117,14 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      const res = await fetch(`/api/pets/${id}`, {
-        method: 'DELETE',
-      });
-      const data = await res.json();
+      
+      const { error: supaError } = await supabase
+        .from('pets')
+        .delete()
+        .eq('id', id);
 
-      if (!res.ok) throw new Error(data.error || 'Erro ao excluir o pet.');
+      if (supaError) throw supaError;
+      
       await fetchPets();
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'Erro ao excluir o pet.';
