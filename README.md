@@ -4,14 +4,14 @@ MeuPetDigital e uma aplicacao web para gerenciamento da saude preventiva de cach
 
 ## Funcionalidades
 
-- Autenticacao de usuarios com Supabase Auth.
+- Autenticacao de usuarios com API local e sessao por cookie.
 - CRUD completo de pets.
-- Catalogo de vacinas no Supabase.
+- Catalogo de vacinas em banco local SQLite.
 - Registro de doses aplicadas e proximas doses.
 - Dashboard com indicadores de pets, vacinas em dia, proximas e atrasadas.
 - Formularios com React Hook Form e validacao Zod.
 - Hooks personalizados para autenticacao, pets e registros vacinais.
-- Row Level Security para isolar dados por tutor.
+- Isolamento dos dados por tutor nas rotas da API.
 
 ## Tecnologias
 
@@ -19,7 +19,7 @@ MeuPetDigital e uma aplicacao web para gerenciamento da saude preventiva de cach
 - React 19
 - TypeScript
 - Tailwind CSS
-- Supabase Auth e PostgreSQL
+- SQLite local com `better-sqlite3`
 - React Hook Form
 - Zod
 - Lucide React
@@ -38,14 +38,14 @@ npm install
 Copy-Item .env.local.example .env.local
 ```
 
-3. Configure `.env.local` com os dados do Supabase:
+3. Configure `.env.local` se optar pela integracao Supabase futura:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-chave-anonima
 ```
 
-4. No SQL Editor do Supabase, execute o conteudo de:
+4. Opcional: se a equipe decidir voltar para Supabase real, execute no SQL Editor o conteudo de:
 
 ```text
 supabase/schema.sql
@@ -72,9 +72,15 @@ src/features/           Vertical Slices (por dominio de negocio)
   auth/                 Autenticacao (componentes, hooks, tipos)
   pets/                 Gestao de pets (componentes, hooks, tipos)
   vacinas/              Vacinacao e registros (componentes, hooks, tipos)
-supabase/schema.sql     Modelo de dados e politicas RLS (a criar)
+supabase/schema.sql     Modelo de dados e politicas RLS para integracao Supabase futura
 docs/                   Documentacao academica e tecnica
 ```
+
+## Estado atual
+
+O runtime atual usa `database.db` com SQLite local. A pasta `supabase/` permanece como base para uma integracao futura com Supabase real, caso a equipe escolha essa direcao antes da entrega.
+
+As pendencias por responsavel estao documentadas em `docs/responsaveis/PENDENCIAS.md`.
 
 ## Entrega academica
 
