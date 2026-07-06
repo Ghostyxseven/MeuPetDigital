@@ -2,6 +2,8 @@
 
 Esta pasta organiza responsabilidades unicas por membro da equipe MeuPetDigital.
 
+Consulte tambem: [Pendencias por responsavel](./PENDENCIAS.md).
+
 ---
 
 ## Equipe e Funcoes
