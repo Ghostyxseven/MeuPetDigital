@@ -26,7 +26,7 @@ export default function LoginPage() {
       await signIn(data.email, data.password);
       router.push('/dashboard');
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : 'Nao foi possivel entrar.');
+      setFormError(err instanceof Error ? err.message : 'Não foi possível entrar.');
     }
   };
 

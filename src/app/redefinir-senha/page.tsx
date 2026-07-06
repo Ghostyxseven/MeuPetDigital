@@ -26,7 +26,7 @@ export default function RedefinirSenhaPage() {
       await updatePassword(data.password);
       router.push('/dashboard');
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : 'Nao foi possivel atualizar a senha.');
+      setFormError(err instanceof Error ? err.message : 'Não foi possível atualizar a senha.');
     }
   };
 

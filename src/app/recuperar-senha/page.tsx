@@ -24,9 +24,9 @@ export default function RecuperarSenhaPage() {
     setFormError(null);
     try {
       await resetPassword(data.email, `${window.location.origin}/redefinir-senha`);
-      setMessage('Enviamos o link de redefinicao para o email informado.');
+      setMessage('Enviamos o link de redefinição para o e-mail informado.');
     } catch (err) {
-      setFormError(err instanceof Error ? err.message : 'Nao foi possivel enviar o email.');
+      setFormError(err instanceof Error ? err.message : 'Não foi possível enviar o e-mail.');
     }
   };
 
@@ -39,7 +39,7 @@ export default function RecuperarSenhaPage() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-slate-950">Recuperar senha</h1>
-            <p className="text-sm text-slate-500">Receba um link seguro por email.</p>
+            <p className="text-sm text-slate-500">Receba um link seguro por e-mail.</p>
           </div>
         </div>
 
