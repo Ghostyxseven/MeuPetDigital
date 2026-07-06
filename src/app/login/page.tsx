@@ -31,16 +31,16 @@ export default function LoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-slate-50 px-4 py-10">
-      <section className="animate-slide-up w-full max-w-md rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <main className="flex min-h-screen items-center justify-center bg-slate-50 dark:bg-slate-950 px-4 py-10 transition-colors duration-200">
+      <section className="animate-slide-up w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-sm">
         {/* Auth Header */}
         <div className="mb-6 flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-emerald-600 text-white">
             <Dog className="h-6 w-6" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-slate-950">Entrar</h1>
-            <p className="text-sm text-slate-500">Acesse o painel do MeuPetDigital.</p>
+            <h1 className="text-xl font-bold text-slate-950 dark:text-white">Entrar</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Acesse o painel do MeuPetDigital.</p>
           </div>
         </div>
 
@@ -61,7 +61,7 @@ export default function LoginPage() {
           />
 
           {formError && (
-            <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
+            <p className="rounded-xl bg-red-50 dark:bg-red-950/20 px-3 py-2 text-sm font-medium text-red-700 dark:text-red-400">
               {formError}
             </p>
           )}
@@ -77,10 +77,10 @@ export default function LoginPage() {
         </form>
 
         <div className="mt-5 flex items-center justify-between text-sm">
-          <Link className="font-semibold text-emerald-700 hover:text-emerald-800 transition-colors" href="/recuperar-senha">
+          <Link className="font-semibold text-emerald-700 hover:text-emerald-800 dark:text-emerald-500 dark:hover:text-emerald-400 transition-colors" href="/recuperar-senha">
             Esqueci a senha
           </Link>
-          <Link className="font-semibold text-slate-700 hover:text-slate-950 transition-colors" href="/cadastro">
+          <Link className="font-semibold text-slate-700 hover:text-slate-950 dark:text-slate-300 dark:hover:text-white transition-colors" href="/cadastro">
             Criar conta
           </Link>
         </div>
