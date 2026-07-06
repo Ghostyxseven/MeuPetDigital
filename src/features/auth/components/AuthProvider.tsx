@@ -1,7 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { User, Session } from '../types';
+import { supabase } from '@/core/lib/supabase/client';
+import { User, Session } from '@supabase/supabase-js';
 
 interface AuthContextType {
   user: User | null;
@@ -18,21 +19,14 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Função para carregar a sessão atual da nossa API local
   const checkSession = async () => {
     try {
-      const res = await fetch('/api/auth/session');
-      const json = await res.json();
-      
-      if (json.data && json.data.session) {
-        setSession(json.data.session);
-        setUser(json.data.session.user);
-      } else {
-        setSession(null);
-        setUser(null);
-      }
+      const { data, error } = await supabase.auth.getSession();
+      if (error) throw error;
+      setSession(data.session);
+      setUser(data.session?.user ?? null);
     } catch (err) {
-      console.error('Erro ao verificar sessão:', err);
+      console.error('Erro ao verificar sessão Supabase:', err);
       setSession(null);
       setUser(null);
     } finally {
@@ -42,18 +36,26 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     checkSession();
+    
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+      setSession(currentSession);
+      setUser(currentSession?.user ?? null);
+      setLoading(false);
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signOut = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/auth/signout', { method: 'POST' });
-      if (res.ok) {
-        setSession(null);
-        setUser(null);
-      }
+      await supabase.auth.signOut();
+      setSession(null);
+      setUser(null);
     } catch (err) {
-      console.error('Erro ao fazer logout:', err);
+      console.error('Erro ao fazer logout Supabase:', err);
     } finally {
       setLoading(false);
     }
