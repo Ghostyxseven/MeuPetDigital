@@ -30,6 +30,7 @@ import {
   EmptyState,
   Spinner,
 } from '@/core/components';
+import { supabase } from '@/core/lib/supabase/client';
 
 
 export default function DashboardPage() {
@@ -55,13 +56,14 @@ function DashboardContent() {
       try {
         setLoading(true);
 
-        const petsRes = await fetch('/api/pets');
-        if (!petsRes.ok) throw new Error('Falha ao carregar pets.');
-        const dbPets = (await petsRes.json()) as Pet[];
+        const { data: dbPets, error: petsError } = await supabase.from('pets').select('*').order('created_at', { ascending: false });
+        if (petsError) throw petsError;
 
-        const registrosRes = await fetch('/api/registros');
-        if (!registrosRes.ok) throw new Error('Falha ao carregar registros.');
-        const dbRegistros = (await registrosRes.json()) as RegistroVacinalDetailed[];
+        const { data: dbRegistros, error: registrosError } = await supabase
+          .from('registros')
+          .select('*, vacinas(nome), pets(nome)')
+          .order('data_aplicacao', { ascending: false });
+        if (registrosError) throw registrosError;
 
         const mappedRegistros: DashboardRegistro[] = (dbRegistros || []).map((item) => {
           return {
