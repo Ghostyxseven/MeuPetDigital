@@ -7,6 +7,7 @@
  */
 
 export { Button } from './Button';
+export { Alert } from './Alert';
 export { Input } from './Input';
 export { Card } from './Card';
 export { StatusBadge } from './StatusBadge';

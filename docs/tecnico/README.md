@@ -1,32 +1,25 @@
-# 📁 Documentação Técnica
+# Documentacao Tecnica
 
-Esta pasta contém documentação voltada para **desenvolvedores** e equipe técnica do projeto.
+Esta pasta contem documentacao voltada para desenvolvedores e equipe tecnica do projeto.
 
----
+## Documentos disponiveis
 
-## 📄 Documentos Disponíveis
-
-| Arquivo | Descrição |
+| Arquivo | Descricao |
 |---------|-----------|
-| [ESTRUTURA.md](./ESTRUTURA.md) | Organização detalhada de pastas e arquivos do projeto |
-| [VARIAMBIENT.md](./VARIAMBIENT.md) | Configuração de variáveis de ambiente e setup do Supabase |
-| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Guia de solução de problemas e debugging |
+| [ESTRUTURA.md](./ESTRUTURA.md) | Organizacao detalhada de pastas e arquivos do projeto |
+| [DESIGN-SYSTEM.md](./DESIGN-SYSTEM.md) | Componentes, tokens visuais e padroes de UI |
+| [VARIAMBIENT.md](./VARIAMBIENT.md) | Configuracao de variaveis de ambiente e setup do Supabase |
+| [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) | Guia de solucao de problemas e debugging |
 
----
+## Publico-alvo
 
-## 🎯 Público-Alvo
+- Desenvolvedores iniciando no projeto.
+- Equipe tecnica precisando de referencia rapida.
+- Mantenedores configurando ambientes.
 
-- **Desenvolvedores** iniciando no projeto
-- **Equipe técnica** precisando de referência rápida
-- **Mantenedores** configurando ambientes
+## Navegacao
 
----
+- [Voltar para docs/index.md](../index.md)
+- [Voltar para README.md](../../README.md)
 
-## 🔗 Navegação
-
-- [← Voltar para docs/index.md](../index.md)
-- [← Voltar para README.md](../../README.md)
-
----
-
-**Última atualização:** 18 de Junho de 2026
+**Ultima atualizacao:** 06 de Julho de 2026

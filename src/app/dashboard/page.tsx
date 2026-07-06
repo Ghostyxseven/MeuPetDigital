@@ -19,8 +19,6 @@ import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { MOCK_PETS, MOCK_REGISTROS } from '@/features/dashboard/mockData';
 import type { DashboardPet, DashboardRegistro } from '@/features/dashboard/types';
-import type { Pet } from '@/features/pets/types';
-import type { RegistroVacinalDetailed } from '@/features/vacinas/types';
 import {
   Header,
   Button,

@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Dog, UserPlus } from 'lucide-react';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { authSchema, type AuthFormData } from '@/features/auth/schemas';
-import { Button, Input } from '@/core/components';
+import { Alert, Button, Input } from '@/core/components';
 
 export default function CadastroPage() {
   const router = useRouter();
@@ -59,11 +59,7 @@ export default function CadastroPage() {
             error={errors.password?.message}
           />
 
-          {formError && (
-            <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
-              {formError}
-            </p>
-          )}
+          {formError && <Alert tone="error">{formError}</Alert>}
 
           <Button
             type="submit"

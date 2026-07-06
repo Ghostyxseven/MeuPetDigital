@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { KeyRound, Mail } from 'lucide-react';
 import { useAuth } from '@/features/auth/hooks/useAuth';
 import { emailSchema, type EmailFormData } from '@/features/auth/schemas';
-import { Button, Input } from '@/core/components';
+import { Alert, Button, Input } from '@/core/components';
 
 export default function RecuperarSenhaPage() {
   const { resetPassword, loading } = useAuth();
@@ -52,16 +52,8 @@ export default function RecuperarSenhaPage() {
             error={errors.email?.message}
           />
 
-          {formError && (
-            <p className="rounded-xl bg-red-50 px-3 py-2 text-sm font-medium text-red-700">
-              {formError}
-            </p>
-          )}
-          {message && (
-            <p className="rounded-xl bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700">
-              {message}
-            </p>
-          )}
+          {formError && <Alert tone="error">{formError}</Alert>}
+          {message && <Alert tone="success">{message}</Alert>}
 
           <Button
             type="submit"

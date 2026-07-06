@@ -1,58 +1,88 @@
-# 👤 Responsabilidades - Gisele
+# Responsabilidades - Gisele
 
-**Role:** Front-End / Design System
+**Role:** Front-End / Design System  
 **GitHub:** @Gisele002
 
 ---
 
-## 📋 Responsabilidades Principais
+## Responsabilidade Unica
 
-### 🎨 Design System
-- [ ] Definir paleta de cores, tipografia e espaçamentos
-- [ ] Criar componentes base: `Button`, `Input`, `Card`, `Badge`
-- [ ] Garantir consistência visual em todas as páginas
-- [ ] Layout responsivo (desktop e mobile)
+Gisele e a responsavel por **design system, consistencia visual e acabamento das telas de autenticacao**.
 
-### 🖥️ Páginas de Autenticação
-- [ ] Página de Login (`/login`)
-- [ ] Página de Cadastro (`/registro`)
-- [ ] Estados visuais de erro e sucesso nos formulários
-- [ ] Integração com `useAuth` (recebe o hook, conecta na tela)
-
-### 🧩 Componentes de UI Reutilizáveis
-- [ ] `PetCard` — card de exibição de um pet
-- [ ] `StatusBadge` — badge verde/amarelo/vermelho de status vacinal
-- [ ] `Header` / `Navbar` — navegação principal
-- [ ] Estados de loading (skeleton ou spinner)
+Ela nao e a responsavel principal por banco, deploy, regras de negocio ou CRUD. Essas areas ficam com os demais membros definidos no indice geral.
 
 ---
 
-## 📁 Documentos Sob Responsabilidade
+## Entregas da Gisele
+
+### Design System
+
+- [x] Definir tokens visuais em `src/app/globals.css`.
+- [x] Criar componentes base: `Button`, `Input`, `Card` e `StatusBadge`.
+- [x] Criar componentes de apoio: `Alert`, `Spinner`, `EmptyState`, `Header`, `MetricCard` e `PetCard`.
+- [x] Documentar o design system em `docs/tecnico/DESIGN-SYSTEM.md`.
+- [ ] Revisar consistencia visual final em todas as paginas.
+- [ ] Validar responsividade em celular.
+
+### Paginas de Autenticacao
+
+- [x] Tela de login (`/login`).
+- [x] Tela de cadastro (`/cadastro`).
+- [x] Tela de recuperacao de senha (`/recuperar-senha`).
+- [x] Tela de redefinicao de senha (`/redefinir-senha`).
+- [x] Estados visuais de erro e sucesso com `Alert`.
+- [ ] Revisar textos finais e acentos visiveis nas telas.
+
+### Componentes de UI Reutilizaveis
+
+- [x] `PetCard` para exibicao compacta de pet.
+- [x] `StatusBadge` para status vacinal.
+- [x] `Header` para navegacao principal.
+- [x] `Spinner` para carregamento.
+- [x] `EmptyState` para listas vazias.
+- [ ] Reduzir classes manuais nas paginas de pets e vacinas quando houver tempo.
+
+---
+
+## Bugs Resolvidos
+
+### Borda dupla no foco dos inputs
+
+- Status: resolvido.
+- Ajuste: campos de formulario usam foco proprio; a regra global `:focus-visible` nao se aplica mais a `input`, `select` e `textarea`.
+- Arquivos principais: `src/app/globals.css` e `src/core/components/Input.tsx`.
+
+---
+
+## Fora do Escopo da Gisele
+
+| Area | Responsavel principal |
+|------|------------------------|
+| Arquitetura, autenticacao e dashboard | Micael |
+| Banco, RLS e deploy | Marcos Vinicius |
+| CRUD de pets e registros vacinais | Antonio Carlos |
+| Testes manuais e PDF final | Josiane |
+
+---
+
+## Documentos Sob Responsabilidade
 
 | Documento | Status |
 |-----------|--------|
-| [docs/externo/CONTRIBUTING.md](../../externo/CONTRIBUTING.md) | ✅ Completo |
-| [docs/tecnico/TROUBLESHOOTING.md](../../tecnico/TROUBLESHOOTING.md) | ✅ Completo |
+| [docs/tecnico/DESIGN-SYSTEM.md](../../tecnico/DESIGN-SYSTEM.md) | Criado |
+| [docs/externo/CONTRIBUTING.md](../../externo/CONTRIBUTING.md) | Apoio |
+| [docs/tecnico/TROUBLESHOOTING.md](../../tecnico/TROUBLESHOOTING.md) | Apoio |
 
 ---
 
-## 🎯 Tasks do Trabalho (entrega)
+## Status Final do Escopo
 
-- [ ] Implementar Design System com cores e tipografia próprias
-- [ ] Telas de login e cadastro funcionando com validação visual
-- [ ] Todos os componentes de UI aplicando o Design System
-
----
-
-## 🐛 Bugs Reportados (Pendente de Correção)
-
-### 🔴 Borda Dupla no Foco dos Inputs
-* **Descrição:** Ao focar em qualquer campo do tipo input (como Email e Senha), o navegador renderiza uma borda dupla verde.
-* **Causa:** O estilo global `:focus-visible` definido em [globals.css](file:///c:/Users/josiane/OneDrive/Documentos/atividadeProgramaçãoWeb/MeuPetDigital/src/app/globals.css) (linha 159) adiciona um `outline: 2px solid var(--primary-500)` com `outline-offset: 2px`. Isso entra em conflito com as classes de foco do próprio componente [Input.tsx](file:///c:/Users/josiane/OneDrive/Documentos/atividadeProgramaçãoWeb/MeuPetDigital/src/core/components/Input.tsx) (`focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20`), gerando duas bordas concêntricas.
-* **Sugestão de Solução:** Adicionar a classe `focus-visible:outline-none` ou `outline-none` no input ou ajustar a regra global de `:focus-visible` no CSS.
-* **Responsável:** @Gisele002
+- [x] Design system base criado.
+- [x] Telas de auth usam componentes compartilhados.
+- [x] Mensagens de erro/sucesso padronizadas.
+- [x] Bug de foco duplo resolvido.
+- [ ] Falta revisao visual em mobile e prints finais para apresentacao.
 
 ---
 
-**Última atualização:** 3 de Julho de 2026
-
+**Ultima atualizacao:** 06 de Julho de 2026
