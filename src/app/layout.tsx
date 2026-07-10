@@ -14,8 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MeuPetDigital",
-  description: "Gerenciamento da saúde preventiva de cães",
+  title: "MeuPetDigital - Saúde preventiva dos seus pets",
+  description:
+    "Gerencie a saúde, as vacinas e o histórico dos seus pets de forma simples e digital.",
 };
 
 export default function RootLayout({
@@ -28,9 +29,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <AuthProvider>
-          {children}
-        </AuthProvider>
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );

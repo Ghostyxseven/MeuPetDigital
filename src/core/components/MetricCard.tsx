@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-type MetricTone = 'slate' | 'emerald' | 'amber' | 'red';
+type MetricTone = "slate" | "emerald" | "amber" | "red";
 
 interface MetricCardProps {
   icon: React.ReactNode;
@@ -10,16 +10,21 @@ interface MetricCardProps {
 }
 
 const toneStyles: Record<MetricTone, string> = {
-  slate: 'text-slate-600 bg-slate-50',
-  emerald: 'text-emerald-600 bg-emerald-50',
-  amber: 'text-amber-600 bg-amber-50',
-  red: 'text-red-600 bg-red-50',
+  slate: "text-slate-600 bg-slate-50 ",
+  emerald: "text-emerald-600 bg-emerald-50",
+  amber: "text-amber-600 bg-amber-50",
+  red: "text-red-600 bg-red-50",
 };
 
 /**
  * Card de métrica para o dashboard (Total, Em dia, Próximas, Atrasadas).
  */
-export function MetricCard({ icon, label, value, tone = 'slate' }: MetricCardProps) {
+export function MetricCard({
+  icon,
+  label,
+  value,
+  tone = "slate",
+}: MetricCardProps) {
   return (
     <div className="animate-fade-in rounded-2xl border border-slate-100 bg-white p-5 shadow-sm transition-all hover:shadow-md">
       <div className="flex items-center justify-between">

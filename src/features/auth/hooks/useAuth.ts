@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useAuthContext } from '../components/AuthProvider';
-import { supabase } from '@/core/lib/supabase/client';
+import { useState } from "react";
+import { useAuthContext } from "../components/AuthProvider";
+import { supabase } from "@/core/lib/supabase/client";
 
 export function useAuth() {
   const { user, session, loading: contextLoading, signOut } = useAuthContext();
@@ -14,11 +14,15 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: supaError } = await supabase.auth.signUp({ email, password });
+      const { data, error: supaError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
       if (supaError) throw supaError;
       return data;
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Erro ao cadastrar usuário.';
+      const errorMsg =
+        err instanceof Error ? err.message : "Erro ao cadastrar usuário.";
       setError(errorMsg);
       throw err;
     } finally {
@@ -31,13 +35,19 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: supaError } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error: supaError } = await supabase.auth.signInWithPassword(
+        { email, password },
+      );
       if (supaError) throw supaError;
       return data;
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Erro ao realizar login.';
+      const originalMessage = err instanceof Error ? err.message : "";
+      const errorMsg =
+        originalMessage === "Invalid login credentials"
+          ? "E-mail ou senha inválidos."
+          : originalMessage || "Não foi possível realizar o login.";
       setError(errorMsg);
-      throw err;
+      throw new Error(errorMsg);
     } finally {
       setLoading(false);
     }
@@ -48,11 +58,15 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: supaError } = await supabase.auth.resetPasswordForEmail(email, { redirectTo });
+      const { data, error: supaError } =
+        await supabase.auth.resetPasswordForEmail(email, { redirectTo });
       if (supaError) throw supaError;
       return data;
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Erro ao enviar email de recuperação.';
+      const errorMsg =
+        err instanceof Error
+          ? err.message
+          : "Erro ao enviar email de recuperação.";
       setError(errorMsg);
       throw err;
     } finally {
@@ -65,11 +79,14 @@ export function useAuth() {
     setLoading(true);
     setError(null);
     try {
-      const { data, error: supaError } = await supabase.auth.updateUser({ password });
+      const { data, error: supaError } = await supabase.auth.updateUser({
+        password,
+      });
       if (supaError) throw supaError;
       return data;
     } catch (err) {
-      const errorMsg = err instanceof Error ? err.message : 'Erro ao atualizar a senha.';
+      const errorMsg =
+        err instanceof Error ? err.message : "Erro ao atualizar a senha.";
       setError(errorMsg);
       throw err;
     } finally {

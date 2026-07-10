@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { supabase } from '@/core/lib/supabase/client';
-import { User, Session } from '@supabase/supabase-js';
+import React, { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "@/core/lib/supabase/client";
+import { User, Session } from "@supabase/supabase-js";
 
 interface AuthContextType {
   user: User | null;
@@ -26,7 +26,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(data.session);
       setUser(data.session?.user ?? null);
     } catch (err) {
-      console.error('Erro ao verificar sessão Supabase:', err);
+      console.error("Erro ao verificar sessão Supabase:", err);
       setSession(null);
       setUser(null);
     } finally {
@@ -36,8 +36,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     checkSession();
-    
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, currentSession) => {
+
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, currentSession) => {
       setSession(currentSession);
       setUser(currentSession?.user ?? null);
       setLoading(false);
@@ -55,14 +57,16 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setSession(null);
       setUser(null);
     } catch (err) {
-      console.error('Erro ao fazer logout Supabase:', err);
+      console.error("Erro ao fazer logout Supabase:", err);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <AuthContext.Provider value={{ user, session, loading, signOut, checkSession }}>
+    <AuthContext.Provider
+      value={{ user, session, loading, signOut, checkSession }}
+    >
       {children}
     </AuthContext.Provider>
   );
@@ -71,7 +75,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export function useAuthContext() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuthContext deve ser utilizado dentro de um AuthProvider');
+    throw new Error(
+      "useAuthContext deve ser utilizado dentro de um AuthProvider",
+    );
   }
   return context;
 }
