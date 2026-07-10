@@ -23,9 +23,13 @@ export default function RecuperarSenhaPage() {
     setMessage(null);
     setFormError(null);
     try {
+      // Tenta usar a URL de produção/ambiente configurada. 
+      // Se não houver, usa a URL atual da janela (ex: localhost:3000).
+      const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+      
       await resetPassword(
         data.email,
-        `${window.location.origin}/redefinir-senha`,
+        `${siteUrl}/redefinir-senha`,
       );
       setMessage("Enviamos o link de redefinição para o e-mail informado.");
     } catch (err) {
