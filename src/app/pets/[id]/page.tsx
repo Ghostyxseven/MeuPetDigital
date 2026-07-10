@@ -48,6 +48,7 @@ function PetDetailContent() {
   const [formError, setFormError] = useState<string | null>(null);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [fotoUrl, setFotoUrl] = useState<string | null>(null);
+  const [isPhotoProcessing, setIsPhotoProcessing] = useState(false);
 
   // PDF Export
   const pdfRef = React.useRef<HTMLDivElement>(null);
@@ -88,6 +89,11 @@ function PetDetailContent() {
   }, [petId, getPetById, setValue]);
 
   const onSubmit = async (data: PetFormData) => {
+    if (isPhotoProcessing) {
+      setFormError('Aguarde a foto terminar de carregar antes de salvar as alterações.');
+      return;
+    }
+
     setFormError(null);
     setSuccessMsg(null);
     setSaving(true);
@@ -240,6 +246,7 @@ function PetDetailContent() {
                   value={fotoUrl}
                   especie={watch("especie") || null}
                   onChange={setFotoUrl}
+                  onProcessingChange={setIsPhotoProcessing}
                 />
                 <div className="text-center">
                   <h2 className="text-base font-bold text-slate-950">Editar Cadastro</h2>
@@ -336,11 +343,11 @@ function PetDetailContent() {
                 <div className="pt-2 flex flex-col gap-2">
                   <button
                     type="submit"
-                    disabled={saving}
+                    disabled={saving || isPhotoProcessing}
                     className="w-full inline-flex items-center justify-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2.5 text-sm font-bold text-white shadow transition hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     <Save className="h-4 w-4" />
-                    {saving ? 'Salvando...' : 'Salvar Alterações'}
+                    {isPhotoProcessing ? 'Preparando foto...' : saving ? 'Salvando...' : 'Salvar Alterações'}
                   </button>
 
                   <button

@@ -10,15 +10,42 @@ interface PetPhotoInputProps {
   value?: string | null;
   especie?: string | null;
   onChange: (base64: string | null) => void;
+  onProcessingChange?: (isProcessing: boolean) => void;
+}
+
+const COMPRESSION_OPTIONS = {
+  maxSizeMB: 0.2,
+  maxWidthOrHeight: 800,
+};
+
+function readAsDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (typeof reader.result === "string") {
+        resolve(reader.result);
+        return;
+      }
+      reject(new Error("A foto não pôde ser lida."));
+    };
+    reader.onerror = () => reject(reader.error ?? new Error("A foto não pôde ser lida."));
+    reader.readAsDataURL(file);
+  });
 }
 
 /**
  * Input para foto do pet fazendo upload e convertendo para Base64.
  * Reduz a imagem antes de converter para não pesar no banco de dados.
  */
-export function PetPhotoInput({ value, especie, onChange }: PetPhotoInputProps) {
+export function PetPhotoInput({
+  value,
+  especie,
+  onChange,
+  onProcessingChange,
+}: PetPhotoInputProps) {
   const [isCompressing, setIsCompressing] = useState(false);
   const [imgError, setImgError] = useState(false);
+  const [processingError, setProcessingError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const hasValidImage = value && !imgError;
@@ -29,40 +56,45 @@ export function PetPhotoInput({ value, especie, onChange }: PetPhotoInputProps) 
 
     try {
       setIsCompressing(true);
+      onProcessingChange?.(true);
       setImgError(false);
+      setProcessingError(null);
 
-      // Opções de compressão: limite de 200kb, máximo de 800px
-      const options = {
-        maxSizeMB: 0.2,
-        maxWidthOrHeight: 800,
-        useWebWorker: true,
-      };
+      // Alguns navegadores móveis, especialmente WebViews e versões do Safari,
+      // não conseguem iniciar o Web Worker usado pela biblioteca. Nesses casos,
+      // repete a compressão na thread principal antes de considerar a foto inválida.
+      let compressedFile: File;
+      try {
+        compressedFile = await imageCompression(file, {
+          ...COMPRESSION_OPTIONS,
+          useWebWorker: true,
+        });
+      } catch {
+        compressedFile = await imageCompression(file, {
+          ...COMPRESSION_OPTIONS,
+          useWebWorker: false,
+        });
+      }
 
-      const compressedFile = await imageCompression(file, options);
-
-      // Converter para Base64
-      const reader = new FileReader();
-      reader.readAsDataURL(compressedFile);
-      reader.onloadend = () => {
-        const base64data = reader.result as string;
-        onChange(base64data); // Passa o Base64 para o formulário
-        setIsCompressing(false);
-      };
-      reader.onerror = () => {
-        console.error("Erro ao ler o arquivo");
-        setIsCompressing(false);
-        setImgError(true);
-      };
+      const base64data = await readAsDataUrl(compressedFile);
+      onChange(base64data);
     } catch (error) {
       console.error("Erro na compressão:", error);
-      setIsCompressing(false);
       setImgError(true);
+      setProcessingError(
+        "Não foi possível preparar esta foto. Tente tirar outra ou escolher uma imagem da galeria.",
+      );
+      onChange(null);
+    } finally {
+      setIsCompressing(false);
+      onProcessingChange?.(false);
     }
   };
 
   const handleRemove = () => {
     onChange(null);
     setImgError(false);
+    setProcessingError(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = ""; // Limpa o input file
     }
@@ -127,13 +159,28 @@ export function PetPhotoInput({ value, especie, onChange }: PetPhotoInputProps) 
       {/* Upload button */}
       <button
         type="button"
-        onClick={() => fileInputRef.current?.click()}
+        onClick={() => {
+          if (fileInputRef.current) {
+            fileInputRef.current.value = "";
+            fileInputRef.current.click();
+          }
+        }}
         disabled={isCompressing}
-        className="inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold text-emerald-700 hover:bg-emerald-50 transition-colors disabled:opacity-50"
+        className="inline-flex min-h-11 items-center gap-1.5 rounded-xl px-3 py-2 text-xs font-bold text-emerald-700 hover:bg-emerald-50 transition-colors disabled:opacity-50"
       >
         <Upload className="h-3.5 w-3.5" />
-        {hasValidImage ? "Trocar foto" : "Adicionar foto"}
+        {isCompressing ? "Preparando foto..." : hasValidImage ? "Trocar foto" : "Adicionar foto"}
       </button>
+
+      <p className="min-h-4 max-w-64 text-center text-[11px] font-semibold" aria-live="polite">
+        {processingError ? (
+          <span className="text-red-600">{processingError}</span>
+        ) : isCompressing ? (
+          <span className="text-emerald-700">Aguarde a foto aparecer antes de salvar.</span>
+        ) : hasValidImage ? (
+          <span className="text-emerald-700">Foto pronta para salvar.</span>
+        ) : null}
+      </p>
     </div>
   );
 }
