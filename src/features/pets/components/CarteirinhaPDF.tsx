@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { forwardRef } from "react";
 import type { Pet } from "@/features/pets/types";
 import type { RegistroVacinalDetailed } from "@/features/vacinas/types";

@@ -10,7 +10,7 @@ import { usePets } from "@/features/pets/hooks/usePets";
 import { petSchema, type PetFormData } from "@/features/pets/schemas";
 import { Alert, AppShell, Button } from "@/core/components";
 import { PetPhotoInput } from "@/features/pets/components/PetPhotoInput";
-import { PetAvatar } from "@/features/pets/components/PetAvatar";
+
 
 export default function NovoPetPage() {
   return (
@@ -69,7 +69,7 @@ function NovoPetContent() {
     }
   };
 
-  const onInvalid = (errs: any) => {
+  const onInvalid = (errs: unknown) => {
     alert("Faltam campos ou há erros de preenchimento:\n" + JSON.stringify(errs, null, 2));
   };
 

@@ -16,7 +16,6 @@ import {
   Clock,
   CheckCircle2,
   AlertCircle,
-  MessageCircle,
 } from "lucide-react";
 import { EmptyState, Spinner } from "@/core/components";
 import { getVacinaStatus, type VacinaStatus } from "@/core/lib/vacinaStatus";

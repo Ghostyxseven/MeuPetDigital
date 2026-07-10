@@ -8,7 +8,7 @@ import { usePets } from "@/features/pets/hooks/usePets";
 import { useRegistrosVacinais } from "@/features/vacinas/hooks/useRegistrosVacinais";
 import { getVacinaStatus, getStatusUI } from "@/core/lib/vacinaStatus";
 import { AppShell, Button, EmptyState, Spinner } from "@/core/components";
-import { getSpeciesIcon } from "@/features/pets/utils/speciesIcon";
+
 import { PetAvatar } from "@/features/pets/components/PetAvatar";
 
 export default function PetsPage() {

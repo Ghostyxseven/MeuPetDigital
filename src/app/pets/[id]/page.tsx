@@ -8,7 +8,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { ArrowLeft, Save, Trash2, AlertTriangle, Syringe, Plus, Download, QrCode, Pencil } from 'lucide-react';
 import { CarteirinhaPDF } from "@/features/pets/components/CarteirinhaPDF";
 import { PetPhotoInput } from "@/features/pets/components/PetPhotoInput";
-import { getSpeciesIcon } from "@/features/pets/utils/speciesIcon";
+
 import { ProtectedRoute } from '@/features/auth/components/ProtectedRoute';
 import { usePets } from '@/features/pets/hooks/usePets';
 import { petSchema, type PetFormData } from '@/features/pets/schemas';
