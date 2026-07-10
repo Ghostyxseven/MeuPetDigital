@@ -28,3 +28,9 @@ export interface RegistroVacinalDetailed extends RegistroVacinal {
   } | null;
 }
 
+export interface UpdateRegistroVacinalInput {
+  vacina_id: string;
+  data_aplicacao: string;
+  proxima_dose: string | null;
+  observacoes: string | null;
+}
