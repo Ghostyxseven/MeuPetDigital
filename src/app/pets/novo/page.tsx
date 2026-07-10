@@ -26,6 +26,7 @@ function NovoPetContent() {
   const [formError, setFormError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [fotoUrl, setFotoUrl] = useState<string | null>(null);
+  const [isPhotoProcessing, setIsPhotoProcessing] = useState(false);
 
   const {
     register,
@@ -45,6 +46,11 @@ function NovoPetContent() {
   });
 
   const onSubmit = async (data: PetFormData) => {
+    if (isPhotoProcessing) {
+      setFormError("Aguarde a foto terminar de carregar antes de salvar o pet.");
+      return;
+    }
+
     setFormError(null);
     setLoading(true);
     try {
@@ -85,6 +91,7 @@ function NovoPetContent() {
               value={fotoUrl}
               especie={watch("especie") || null}
               onChange={setFotoUrl}
+              onProcessingChange={setIsPhotoProcessing}
             />
             <div className="text-center sm:text-left">
               <h1 className="text-2xl font-black tracking-tight text-slate-950">Cadastrar pet</h1>
@@ -240,12 +247,12 @@ function NovoPetContent() {
               </Button>
               <Button
                 type="submit"
-                disabled={loading}
-                loading={loading}
+                disabled={loading || isPhotoProcessing}
+                loading={loading || isPhotoProcessing}
                 icon={<Save className="h-4 w-4" />}
                 className="flex-1"
               >
-                {loading ? "Cadastrando..." : "Salvar Pet"}
+                {isPhotoProcessing ? "Preparando foto..." : loading ? "Cadastrando..." : "Salvar Pet"}
               </Button>
             </div>
           </form>
