@@ -1,0 +1,7 @@
+# Agent OS Standards Index
+
+standards:
+  - path: frontend/design-system.md
+    description: Tokens, componentes e consistencia visual do MeuPetDigital
+  - path: frontend/responsive-accessibility.md
+    description: Regras mobile-first, acessibilidade e estados de interface
