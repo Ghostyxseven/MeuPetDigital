@@ -105,6 +105,9 @@
   --color-emerald-600: var(--primary-600);
   --color-emerald-700: var(--primary-700);
   --color-emerald-800: var(--primary-800);
+  --color-teal-400: var(--secondary-400);
+  --color-teal-500: var(--secondary-500);
+  --color-teal-600: var(--secondary-600);
 }
 
 /* ── Base ──────────────────────────────────────────────────── */
@@ -160,4 +163,15 @@ body {
   outline: 2px solid var(--primary-500);
   outline-offset: 2px;
   border-radius: var(--radius-sm);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

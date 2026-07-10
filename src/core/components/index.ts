@@ -6,13 +6,15 @@
  * Uso: import { Button, Input, Card } from '@/core/components';
  */
 
-export { Button } from './Button';
-export { Alert } from './Alert';
-export { Input } from './Input';
-export { Card } from './Card';
-export { StatusBadge } from './StatusBadge';
-export { Spinner } from './Spinner';
-export { EmptyState } from './EmptyState';
-export { Header } from './Header';
-export { PetCard } from './PetCard';
-export { MetricCard } from './MetricCard';
+export { Button } from "./Button";
+export { Alert } from "./Alert";
+export { Input } from "./Input";
+export { Card } from "./Card";
+export { StatusBadge } from "./StatusBadge";
+export { Spinner } from "./Spinner";
+export { EmptyState } from "./EmptyState";
+export { Header } from "./Header";
+export { PetCard } from "./PetCard";
+export { MetricCard } from "./MetricCard";
+export { AppShell } from "./AppShell";
+export { AuthLayout } from "./AuthLayout";

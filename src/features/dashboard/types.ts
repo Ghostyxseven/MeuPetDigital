@@ -1,8 +1,9 @@
-import type { VacinaStatus } from '@/core/lib/vacinaStatus';
+import type { VacinaStatus } from "@/core/lib/vacinaStatus";
 
 export interface DashboardPet {
   id: string;
   nome: string;
+  especie: string;
   raca: string | null;
   data_nascimento: string | null;
   peso: number | null;

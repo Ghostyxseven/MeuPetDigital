@@ -1,11 +1,11 @@
-import { z } from 'zod';
+import { z } from "zod";
 
 export const emailSchema = z.object({
-  email: z.string().email('Informe um email valido.'),
+  email: z.string().email("Informe um email valido."),
 });
 
 export const passwordSchema = z.object({
-  password: z.string().min(6, 'A senha precisa ter pelo menos 6 caracteres.'),
+  password: z.string().min(6, "A senha precisa ter pelo menos 6 caracteres."),
 });
 
 export const authSchema = emailSchema.extend(passwordSchema.shape);

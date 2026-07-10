@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@/features/auth/hooks/useAuth';
-import { supabase } from '@/core/lib/supabase/client';
-import type { Pet, CreatePetInput, UpdatePetInput } from '../types';
+import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { supabase } from "@/core/lib/supabase/client";
+import type { Pet, CreatePetInput, UpdatePetInput } from "../types";
 
 export function usePets() {
   const { user } = useAuth();
@@ -19,17 +19,18 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const { data, error: supaError } = await supabase
-        .from('pets')
-        .select('*')
-        .order('created_at', { ascending: false });
+        .from("pets")
+        .select("*")
+        .order("created_at", { ascending: false });
 
       if (supaError) throw supaError;
-      
+
       setPets((data as Pet[]) || []);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erro ao carregar os pets.';
+      const msg =
+        err instanceof Error ? err.message : "Erro ao carregar os pets.";
       setError(msg);
     } finally {
       setIsLoading(false);
@@ -40,17 +41,18 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const { data, error: supaError } = await supabase
-        .from('pets')
-        .select('*')
-        .eq('id', id)
+        .from("pets")
+        .select("*")
+        .eq("id", id)
         .single();
 
       if (supaError) throw supaError;
       return data as Pet;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erro ao buscar detalhes do pet.';
+      const msg =
+        err instanceof Error ? err.message : "Erro ao buscar detalhes do pet.";
       setError(msg);
       throw err;
     } finally {
@@ -59,28 +61,29 @@ export function usePets() {
   }, []);
 
   const createPet = async (input: CreatePetInput) => {
-    if (!user) throw new Error('Usuário não autenticado.');
+    if (!user) throw new Error("Usuário não autenticado.");
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const newPet = {
         ...input,
-        user_id: user.id
+        user_id: user.id,
       };
 
       const { data, error: supaError } = await supabase
-        .from('pets')
+        .from("pets")
         .insert(newPet)
         .select()
         .single();
 
       if (supaError) throw supaError;
-      
+
       await fetchPets();
       return data as Pet;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erro ao cadastrar o pet.';
+      const msg =
+        err instanceof Error ? err.message : "Erro ao cadastrar o pet.";
       setError(msg);
       throw err;
     } finally {
@@ -92,20 +95,21 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const { data, error: supaError } = await supabase
-        .from('pets')
+        .from("pets")
         .update(input)
-        .eq('id', id)
+        .eq("id", id)
         .select()
         .single();
 
       if (supaError) throw supaError;
-      
+
       await fetchPets();
       return data as Pet;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erro ao atualizar o pet.';
+      const msg =
+        err instanceof Error ? err.message : "Erro ao atualizar o pet.";
       setError(msg);
       throw err;
     } finally {
@@ -117,17 +121,17 @@ export function usePets() {
     try {
       setIsLoading(true);
       setError(null);
-      
+
       const { error: supaError } = await supabase
-        .from('pets')
+        .from("pets")
         .delete()
-        .eq('id', id);
+        .eq("id", id);
 
       if (supaError) throw supaError;
-      
+
       await fetchPets();
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erro ao excluir o pet.';
+      const msg = err instanceof Error ? err.message : "Erro ao excluir o pet.";
       setError(msg);
       throw err;
     } finally {

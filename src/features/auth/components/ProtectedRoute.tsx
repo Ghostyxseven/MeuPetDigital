@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import React, { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { useAuth } from '../hooks/useAuth';
-import { Spinner } from '@/core/components';
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../hooks/useAuth";
+import { Spinner } from "@/core/components";
 
 interface ProtectedRouteProps {
   children: React.ReactNode;
@@ -15,7 +15,7 @@ export function ProtectedRoute({ children }: ProtectedRouteProps) {
 
   useEffect(() => {
     if (!loading && !user) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [user, loading, router]);
 

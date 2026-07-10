@@ -1,8 +1,9 @@
-import React from 'react';
-import { Dog, Shield } from 'lucide-react';
-import { Card } from './Card';
-import { StatusBadge } from './StatusBadge';
-import type { DashboardPet } from '@/features/dashboard/types';
+import React from "react";
+import { Shield } from "lucide-react";
+import { Card } from "./Card";
+import { StatusBadge } from "./StatusBadge";
+import { PetAvatar } from "@/features/pets/components/PetAvatar";
+import type { DashboardPet } from "@/features/dashboard/types";
 
 interface PetCardProps {
   pet: DashboardPet;
@@ -10,32 +11,68 @@ interface PetCardProps {
 }
 
 /**
- * Card de exibição de um pet com nome, raça, peso, RG e status vacinal.
+ * Card de exibição de um pet com foto/avatar, nome, espécie, raça, peso, RG e status vacinal.
  */
 export function PetCard({ pet, onClick }: PetCardProps) {
   return (
-    <Card hoverable onClick={onClick} className="p-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-slate-100 text-slate-500 transition-colors group-hover:bg-emerald-50 group-hover:text-emerald-600">
-            <Dog className="h-6 w-6" />
-          </div>
-          <div>
-            <h3 className="font-bold text-slate-900">{pet.nome}</h3>
-            <p className="text-xs font-medium text-slate-400">
-              {pet.raca || 'Sem raça definida'}{' '}
-              {pet.peso ? `— ${pet.peso}kg` : ''}
-            </p>
-            {pet.rg_sinpatinhas && (
-              <span className="mt-1 inline-flex items-center gap-1 rounded bg-slate-50 px-1.5 py-0.5 text-[9px] font-semibold text-slate-500">
-                <Shield className="h-2.5 w-2.5" />
-                {pet.rg_sinpatinhas}
-              </span>
-            )}
-          </div>
-        </div>
+    <Card hoverable onClick={onClick} className="overflow-hidden p-0 group">
+      {/* Header da "Carteirinha" */}
+      <div className="flex w-full items-center justify-between bg-gradient-to-r from-emerald-800 to-emerald-600 px-4 py-2.5">
+        <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-100/80">
+          ID Animal
+        </span>
         <StatusBadge status={pet.statusVacinal} />
       </div>
+
+      <div className="flex w-full items-start gap-4 p-4">
+        <div className="rounded-xl border-2 border-slate-100 bg-slate-50 p-1">
+          <PetAvatar
+            fotoUrl={pet.foto_url}
+            especie={pet.especie}
+            nome={pet.nome}
+            size="md"
+            className="rounded-lg shadow-sm"
+          />
+        </div>
+        
+        <div className="min-w-0 flex-1 space-y-3 text-left">
+          <div>
+            <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">
+              Nome do Pet
+            </div>
+            <h3 className="truncate text-base font-black leading-tight text-slate-900 group-hover:text-emerald-700">
+              {pet.nome}
+            </h3>
+          </div>
+          
+          <div className="grid grid-cols-2 gap-x-2 gap-y-2">
+            <div>
+              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Espécie / Raça</div>
+              <div className="truncate text-[11px] font-semibold text-slate-700">
+                {pet.especie} {pet.raca ? `• ${pet.raca}` : ""}
+              </div>
+            </div>
+            <div>
+              <div className="text-[9px] font-bold uppercase tracking-wider text-slate-400">Peso</div>
+              <div className="truncate text-[11px] font-semibold text-slate-700">
+                {pet.peso ? `${pet.peso} kg` : "-"}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {pet.rg_sinpatinhas && (
+        <div className="flex w-full items-center justify-between border-t border-slate-100 bg-slate-50 px-4 py-2.5">
+          <div className="flex items-center gap-1.5 text-[11px] font-bold text-slate-500">
+            <Shield className="h-3.5 w-3.5 text-emerald-600" />
+            <span>SinPatinhas:</span>
+          </div>
+          <span className="font-mono text-[11px] font-bold text-slate-800">
+            {pet.rg_sinpatinhas}
+          </span>
+        </div>
+      )}
     </Card>
   );
 }

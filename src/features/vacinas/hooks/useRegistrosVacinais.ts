@@ -1,9 +1,17 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
-import { useAuth } from '@/features/auth/hooks/useAuth';
-import { supabase } from '@/core/lib/supabase/client';
-import type { RegistroVacinalDetailed } from '../types';
+import { useState, useEffect, useCallback } from "react";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import { supabase } from "@/core/lib/supabase/client";
+import type {
+  RegistroVacinalDetailed,
+  UpdateRegistroVacinalInput,
+} from "../types";
+
+function notifyRegistroChange() {
+  if (typeof window === "undefined") return;
+  localStorage.setItem("meupetdigital:registros-updated", Date.now().toString());
+}
 
 export function useRegistrosVacinais(petId?: string) {
   const { user } = useAuth();
@@ -21,16 +29,18 @@ export function useRegistrosVacinais(petId?: string) {
       setError(null);
 
       let query = supabase
-        .from('registros')
-        .select(`
-          *,
-          vacinas ( id, nome, intervalo_dias ),
-          pets ( id, nome )
-        `)
-        .order('data_aplicacao', { ascending: false });
+        .from("registros")
+        .select(
+          `
+ *,
+ vacinas ( id, nome, intervalo_dias ),
+ pets ( id, nome )
+ `,
+        )
+        .order("data_aplicacao", { ascending: false });
 
       if (petId) {
-        query = query.eq('pet_id', petId);
+        query = query.eq("pet_id", petId);
       }
 
       const { data, error: supaError } = await query;
@@ -39,7 +49,10 @@ export function useRegistrosVacinais(petId?: string) {
 
       setRegistros((data as RegistroVacinalDetailed[]) || []);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erro ao buscar registros vacinais.';
+      const msg =
+        err instanceof Error
+          ? err.message
+          : "Erro ao buscar registros vacinais.";
       setError(msg);
     } finally {
       setIsLoading(false);
@@ -53,28 +66,85 @@ export function useRegistrosVacinais(petId?: string) {
     proxima_dose?: string | null;
     observacoes?: string | null;
   }) => {
-    if (!user) throw new Error('Usuário não autenticado.');
+    if (!user) throw new Error("Usuário não autenticado.");
     try {
       setIsLoading(true);
       setError(null);
 
       const { data, error: supaError } = await supabase
-        .from('registros')
+        .from("registros")
         .insert(input)
         .select()
         .single();
 
       if (supaError) throw supaError;
-      
+
       await fetchRegistros();
+      notifyRegistroChange();
       return data;
     } catch (err) {
-      const msg = err instanceof Error ? err.message : 'Erro ao registrar vacina.';
+      const msg =
+        err instanceof Error ? err.message : "Erro ao registrar vacina.";
       setError(msg);
       throw err;
     } finally {
       setIsLoading(false);
     }
+  };
+
+  const updateRegistro = async (
+    id: string,
+    input: UpdateRegistroVacinalInput,
+  ) => {
+    if (!user) throw new Error("Usuário não autenticado.");
+    setError(null);
+
+    const { data, error: supaError } = await supabase
+      .from("registros")
+      .update(input)
+      .eq("id", id)
+      .select(
+        `
+          *,
+          vacinas ( id, nome, intervalo_dias ),
+          pets ( id, nome )
+        `,
+      )
+      .single();
+
+    if (supaError) {
+      const message = supaError.message || "Erro ao atualizar a vacina.";
+      setError(message);
+      throw new Error(message);
+    }
+
+    const updated = data as RegistroVacinalDetailed;
+    setRegistros((current) =>
+      current.map((registro) => (registro.id === id ? updated : registro)),
+    );
+    notifyRegistroChange();
+    return updated;
+  };
+
+  const deleteRegistro = async (id: string) => {
+    if (!user) throw new Error("Usuário não autenticado.");
+    setError(null);
+
+    const { error: supaError } = await supabase
+      .from("registros")
+      .delete()
+      .eq("id", id);
+
+    if (supaError) {
+      const message = supaError.message || "Erro ao excluir a vacina.";
+      setError(message);
+      throw new Error(message);
+    }
+
+    setRegistros((current) =>
+      current.filter((registro) => registro.id !== id),
+    );
+    notifyRegistroChange();
   };
 
   useEffect(() => {
@@ -87,5 +157,7 @@ export function useRegistrosVacinais(petId?: string) {
     error,
     fetchRegistros,
     createRegistro,
+    updateRegistro,
+    deleteRegistro,
   };
 }
