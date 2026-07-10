@@ -224,6 +224,7 @@ function PetDetailContent() {
               peso: watch("peso") || null,
               rg_sinpatinhas: watch("rg_sinpatinhas") || "",
               foto_url: fotoUrl,
+              whatsapp: null,
               created_at: new Date().toISOString(),
             }}
             registros={registros}
