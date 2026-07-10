@@ -177,17 +177,7 @@ export default function SharedPetCardPage() {
             Carteirinha compartilhada pelo tutor em modo somente leitura.
           </p>
 
-          {pet.whatsapp && (
-            <a
-              href={`https://wa.me/55${pet.whatsapp.replace(/\D/g, "")}?text=Olá! Escaneei a coleira digital e estou com o ${pet.nome}!`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-[#25D366] px-4 py-3.5 font-bold text-white shadow-lg shadow-[#25D366]/20 transition-all hover:-translate-y-0.5 hover:bg-[#128C7E] sm:w-auto"
-            >
-              <MessageCircle className="h-5 w-5" />
-              Chamar dono no WhatsApp
-            </a>
-          )}
+
 
           {/* Quick stats */}
           {totalVacinas > 0 && (
