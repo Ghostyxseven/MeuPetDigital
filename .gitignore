@@ -37,9 +37,11 @@ pids
 .env.production.local
 .env*.local
 
-# IDE and editors
+# IDE, local agents, and generated assistant artifacts
 .idea/
 .vscode/
+.agent/
+_bmad/
 *.swp
 *.swo
 *~
@@ -62,7 +64,7 @@ next-env.d.ts
 *.temp
 docs/temp/
 
-# PDFs e documentos pessoais (não versionar)
+# PDFs e documentos pessoais (nao versionar)
 *.pdf
 !docs/**/*.pdf
 Trabalho Final-*.pdf

@@ -23,18 +23,18 @@ Ele nao e o responsavel principal por CRUD de pets, banco/deploy ou documentacao
 
 ### Autenticacao e Sessao
 - [x] Implementar hook `useAuth`.
-- [x] Implementar `AuthProvider` para sessao local da aplicacao.
+- [x] Implementar `AuthProvider` integrado ao Supabase Auth.
 - [x] Implementar `ProtectedRoute` para proteger rotas autenticadas.
 - [x] Criar pagina de login (`/login`).
 - [x] Criar pagina de cadastro (`/cadastro`).
 - [x] Criar fluxo de recuperacao de senha (`/recuperar-senha` e `/redefinir-senha`).
-- [ ] Fortalecer a sessao local antes de tratar como producao.
+- [ ] Validar sessao real do Supabase Auth em desenvolvimento e deploy.
 
 ### Dashboard Principal
 - [x] Implementar dashboard autenticado (`/dashboard`).
 - [x] Exibir indicadores de pets em dia, proximos e atrasados.
 - [x] Implementar filtros por status e por pet.
-- [x] Consumir dados reais das APIs locais do projeto.
+- [x] Consumir dados reais do Supabase.
 - [x] Manter dados de demonstracao separados da pagina em `src/features/dashboard/mockData.ts`.
 
 ---
@@ -66,8 +66,8 @@ Ele nao e o responsavel principal por CRUD de pets, banco/deploy ou documentacao
 - [x] Dashboard implementado.
 - [x] Mock removido da pagina e separado em modulo proprio.
 - [x] Lint e build validados em 06 de julho de 2026.
-- [ ] Decidir junto com a equipe se a entrega final sera SQLite local ou Supabase real.
-- [ ] Revisar integracao final quando Marcos concluir a decisao de banco/deploy e Antonio validar o CRUD completo.
+- [x] Decisao registrada: entrega final com Supabase real.
+- [ ] Revisar integracao final quando Marcos validar RLS/deploy e Antonio validar o CRUD completo.
 
 ---
 

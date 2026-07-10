@@ -4,14 +4,15 @@ MeuPetDigital e uma aplicacao web para gerenciamento da saude preventiva de cach
 
 ## Funcionalidades
 
-- Autenticacao de usuarios com API local e sessao por cookie.
+- Autenticacao de usuarios com Supabase Auth.
 - CRUD completo de pets.
-- Catalogo de vacinas em banco local SQLite.
+- Catalogo de vacinas no PostgreSQL do Supabase.
 - Registro de doses aplicadas e proximas doses.
 - Dashboard com indicadores de pets, vacinas em dia, proximas e atrasadas.
+- Carteirinha compartilhável por QR Code, com link temporário e revogável.
 - Formularios com React Hook Form e validacao Zod.
 - Hooks personalizados para autenticacao, pets e registros vacinais.
-- Isolamento dos dados por tutor nas rotas da API.
+- Isolamento dos dados por tutor com RLS no Supabase.
 
 ## Tecnologias
 
@@ -19,7 +20,8 @@ MeuPetDigital e uma aplicacao web para gerenciamento da saude preventiva de cach
 - React 19
 - TypeScript
 - Tailwind CSS
-- SQLite local com `better-sqlite3`
+- Supabase Auth
+- PostgreSQL no Supabase com RLS
 - React Hook Form
 - Zod
 - Lucide React
@@ -38,17 +40,23 @@ npm install
 Copy-Item .env.local.example .env.local
 ```
 
-3. Configure `.env.local` se optar pela integracao Supabase futura:
+3. Configure `.env.local` com as credenciais do Supabase:
 
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://seu-projeto.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=sua-chave-anonima
 ```
 
-4. Opcional: se a equipe decidir voltar para Supabase real, execute no SQL Editor o conteudo de:
+4. Execute no SQL Editor do Supabase o conteudo de:
 
 ```text
 supabase/schema.sql
+```
+
+Em um banco que já possui o schema anterior, aplique também a migration:
+
+```text
+supabase/migrations/202607092230_add_pet_share_links.sql
 ```
 
 5. Inicie o servidor:
@@ -72,13 +80,17 @@ src/features/           Vertical Slices (por dominio de negocio)
   auth/                 Autenticacao (componentes, hooks, tipos)
   pets/                 Gestao de pets (componentes, hooks, tipos)
   vacinas/              Vacinacao e registros (componentes, hooks, tipos)
-supabase/schema.sql     Modelo de dados e politicas RLS para integracao Supabase futura
+supabase/schema.sql     Modelo de dados, seed e politicas RLS do Supabase
 docs/                   Documentacao academica e tecnica
 ```
 
+## BMAD
+
+O projeto possui artefatos BMAD para planejamento, arquitetura, historias e QA. Veja `docs/BMAD-USO.md` antes de usar o BMAD como guia de implementacao.
+
 ## Estado atual
 
-O runtime atual usa `database.db` com SQLite local. A pasta `supabase/` permanece como base para uma integracao futura com Supabase real, caso a equipe escolha essa direcao antes da entrega.
+O runtime atual usa Supabase real para autenticacao, banco PostgreSQL e RLS. A entrega deve manter `supabase/schema.sql`, `.env.local.example` e a documentacao alinhados a essa decisao.
 
 As pendencias por responsavel estao documentadas em `docs/responsaveis/PENDENCIAS.md`.
 
