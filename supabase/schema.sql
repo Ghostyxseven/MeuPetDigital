@@ -166,7 +166,6 @@ CREATE POLICY "Tutores podem criar compartilhamentos de seus pets"
     WITH CHECK (
         auth.uid() = user_id
         AND expires_at > now()
-        AND expires_at <= now() + interval '8 days'
         AND EXISTS (
             SELECT 1 FROM public.pets
             WHERE pets.id = pet_share_links.pet_id
@@ -199,7 +198,8 @@ AS $$
             'data_nascimento', pet.data_nascimento,
             'peso', pet.peso,
             'foto_url', pet.foto_url,
-            'rg_sinpatinhas', pet.rg_sinpatinhas
+            'rg_sinpatinhas', pet.rg_sinpatinhas,
+            'whatsapp', pet.whatsapp
         ),
         'registros', COALESCE((
             SELECT jsonb_agg(

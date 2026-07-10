@@ -37,6 +37,7 @@ export function SharePetCardModal({
   } = usePetShare(petId);
   const [qrDataUrl, setQrDataUrl] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [durationDays, setDurationDays] = useState(9999);
 
   useEffect(() => {
     if (!publicUrl) {
@@ -131,14 +132,27 @@ export function SharePetCardModal({
                   Gere um QR Code para {petName}
                 </p>
                 <p className="mt-2 text-xs leading-5 text-slate-600">
-                  O link ficará válido por 7 dias e poderá ser revogado a qualquer momento.
+                  O link ficará ativo pelo tempo que você escolher e poderá ser revogado a qualquer momento.
                 </p>
+                <div className="mt-4 text-left">
+                  <label className="block text-xs font-bold text-emerald-900 mb-1">Validade do link</label>
+                  <select
+                    value={durationDays}
+                    onChange={(e) => setDurationDays(Number(e.target.value))}
+                    className="w-full rounded-xl border border-emerald-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/20"
+                  >
+                    <option value={7}>7 dias (Recomendado para Viagens/Hotelzinho)</option>
+                    <option value={30}>30 dias</option>
+                    <option value={180}>6 meses</option>
+                    <option value={9999}>Para sempre (Recomendado para Coleira/Tags)</option>
+                  </select>
+                </div>
               </div>
               <Button
                 className="w-full"
                 loading={isSaving}
                 icon={<QrCode className="h-4 w-4" />}
-                onClick={() => void createShareLink()}
+                onClick={() => void createShareLink(durationDays)}
               >
                 Gerar QR Code
               </Button>

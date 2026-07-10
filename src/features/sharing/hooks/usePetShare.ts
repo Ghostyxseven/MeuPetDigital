@@ -4,8 +4,6 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/core/lib/supabase/client";
 import type { PetShareLink } from "../types";
 
-const SHARE_DURATION_DAYS = 7;
-
 export function usePetShare(petId: string) {
   const [shareLink, setShareLink] = useState<PetShareLink | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -44,7 +42,7 @@ export function usePetShare(petId: string) {
     void fetchActiveLink();
   }, [fetchActiveLink]);
 
-  const createShareLink = async () => {
+  const createShareLink = async (daysToLive: number) => {
     setIsSaving(true);
     setError(null);
 
@@ -61,7 +59,12 @@ export function usePetShare(petId: string) {
         .is("revoked_at", null);
 
       const expiresAt = new Date();
-      expiresAt.setDate(expiresAt.getDate() + SHARE_DURATION_DAYS);
+      if (daysToLive === 9999) {
+        // "Pra sempre" -> Joga pra 100 anos no futuro
+        expiresAt.setFullYear(expiresAt.getFullYear() + 100);
+      } else {
+        expiresAt.setDate(expiresAt.getDate() + daysToLive);
+      }
 
       const { data, error: insertError } = await supabase
         .from("pet_share_links")
