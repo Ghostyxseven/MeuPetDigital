@@ -36,7 +36,7 @@ export const CarteirinhaPDF = forwardRef<HTMLDivElement, CarteirinhaPDFProps>(
 
     const formatDate = (dateString?: string | null) => {
       if (!dateString) return "-";
-      return new Date(dateString).toLocaleDateString("pt-BR");
+      return new Date(dateString).toLocaleDateString("pt-BR", { timeZone: 'UTC' });
     };
 
     return (

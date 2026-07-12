@@ -180,7 +180,7 @@ function PetDetailContent() {
   };
 
   const formatDate = (value: string) => {
-    return new Date(value).toLocaleDateString('pt-BR');
+    return new Date(value).toLocaleDateString('pt-BR', { timeZone: 'UTC' });
   };
 
   if (loading) {
